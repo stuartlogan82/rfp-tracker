@@ -102,20 +102,7 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 5.9 Implement manual deadline add/edit/delete within the RFP detail view
   - [x] 5.10 Wire up the full upload-to-extraction flow: user uploads document → file is saved → text extracted → AI extracts dates → user reviews → dates saved → RFP created or updated
 
-- [ ] 6.0 Dashboard UI & deadline visualization
-  - [ ] 6.1 Create and checkout a new feature branch (`git checkout -b feature/dashboard-ui`)
-  - [ ] 6.2 Build the main dashboard layout in `src/app/page.tsx` — header, summary area, deadline list, and RFP sidebar/panel
-  - [ ] 6.3 Build the `SummaryCard` component — shows count of deadlines due this week and any overdue deadlines
-  - [ ] 6.4 Build the `DeadlineTable` component — a sortable table/list displaying: date, time, label, parent RFP name, and urgency indicator
-  - [ ] 6.5 Implement urgency color-coding logic:
-    - Red: deadline is within 3 days or overdue
-    - Yellow/Amber: deadline is within 7 days
-    - Green: deadline is more than 7 days away
-    - Grey: deadline has passed and is marked completed
-  - [ ] 6.6 Sort deadlines by date (soonest first) by default
-  - [ ] 6.7 Implement filter/toggle to show or hide deadlines from non-active RFPs (Won, Lost, No-Bid, Archived)
-  - [ ] 6.8 Add clickable RFP name in the deadline table that opens the RFP detail view
-  - [ ] 6.9 Ensure all displayed dates use UK timezone (Europe/London) formatting
+- [ ] 6.0 Dashboard UI & deadline visualization — **See `tasks/tasks-dashboard-ui.md` for detailed sub-tasks**
 
 - [ ] 7.0 In-app notifications & calendar export
   - [ ] 7.1 Create and checkout a new feature branch (`git checkout -b feature/notifications-calendar-export`)
