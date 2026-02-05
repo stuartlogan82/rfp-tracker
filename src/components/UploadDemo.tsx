@@ -1,50 +1,26 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { UploadZone } from './UploadZone';
 import DateReview from './DateReview';
+import RfpForm from './RfpForm';
 import type { ExtractedDate } from '@/lib/openai';
 
 export function UploadDemo() {
   const [rfpId, setRfpId] = useState<number | null>(null);
+  const [rfpName, setRfpName] = useState<string>('');
+  const [rfpAgency, setRfpAgency] = useState<string>('');
   const [documents, setDocuments] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const [extractedDates, setExtractedDates] = useState<ExtractedDate[] | null>(null);
   const [extracting, setExtracting] = useState(false);
   const [currentDocumentId, setCurrentDocumentId] = useState<number | null>(null);
 
-  useEffect(() => {
-    // Create a demo RFP on mount
-    const createDemoRfp = async () => {
-      try {
-        const response = await fetch('/api/rfps', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: 'Demo RFP',
-            agency: 'Demo Agency',
-            status: 'Active',
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to create demo RFP');
-        }
-
-        const data = await response.json();
-        setRfpId(data.rfp.id);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to initialize');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    createDemoRfp();
-  }, []);
+  const handleRfpCreated = (rfp: any) => {
+    setRfpId(rfp.id);
+    setRfpName(rfp.name);
+    setRfpAgency(rfp.agency);
+  };
 
   const handleUploadComplete = async (document: any) => {
     setDocuments((prev) => [...prev, document]);
@@ -88,32 +64,61 @@ export function UploadDemo() {
     setCurrentDocumentId(null);
   };
 
-  if (isLoading) {
-    return (
-      <div className="bg-white rounded-lg shadow p-8 text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-        <p className="text-gray-600">Initializing...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-8 text-center">
-        <p className="text-red-600">Error: {error}</p>
-        <p className="text-sm text-gray-600 mt-2">
-          Make sure the database is set up and the API routes are working.
-        </p>
-      </div>
-    );
-  }
-
+  // Show RFP creation form if no RFP exists yet
   if (!rfpId) {
-    return null;
+    return (
+      <div className="space-y-6">
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            Create New RFP
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Enter the RFP details below, then you'll be able to upload documents and extract deadlines.
+          </p>
+          <RfpForm onSuccess={handleRfpCreated} />
+        </div>
+
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-900 mb-2">Getting Started</h3>
+          <ul className="text-sm text-blue-700 space-y-1">
+            <li>• Enter the RFP name and customer/agency name</li>
+            <li>• Upload RFP documents (PDF, DOCX, XLSX, or images)</li>
+            <li>• AI will automatically extract deadline dates</li>
+            <li>• Review and save the extracted dates</li>
+          </ul>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
+      {/* RFP Info Header */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex justify-between items-start">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">{rfpName}</h2>
+            <p className="text-gray-600 mt-1">Agency: {rfpAgency}</p>
+            <p className="text-sm text-gray-500 mt-1">RFP ID: {rfpId}</p>
+          </div>
+          <button
+            onClick={() => {
+              if (confirm('Start over with a new RFP? Current data will remain saved.')) {
+                setRfpId(null);
+                setRfpName('');
+                setRfpAgency('');
+                setDocuments([]);
+                setExtractedDates(null);
+                setError('');
+              }
+            }}
+            className="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-50 rounded-md hover:bg-blue-100"
+          >
+            New RFP
+          </button>
+        </div>
+      </div>
+
       {/* Upload Section */}
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">
@@ -192,16 +197,18 @@ export function UploadDemo() {
         </div>
       )}
 
-      {/* Demo Info */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-900 mb-2">Demo Info</h3>
-        <p className="text-sm text-blue-700">
-          RFP ID: {rfpId} | Documents: {documents.length}
-        </p>
-        <p className="text-xs text-blue-600 mt-2">
-          Upload a PDF, DOCX, XLSX, or image file to automatically extract deadline dates!
-        </p>
-      </div>
+      {/* Help Info */}
+      {documents.length === 0 && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-900 mb-2">Next Steps</h3>
+          <p className="text-sm text-blue-700 mb-2">
+            Upload a document to automatically extract deadline dates!
+          </p>
+          <p className="text-xs text-blue-600">
+            Supported formats: PDF, DOCX, XLSX, PNG, JPG, TIFF
+          </p>
+        </div>
+      )}
     </div>
   );
 }
