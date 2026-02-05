@@ -1,43 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-
-type RfpStatus = 'Active' | 'Won' | 'Lost' | 'NoBid' | 'Archived';
-
-interface Deadline {
-  id: number;
-  rfpId: number;
-  date: string;
-  time: string | null;
-  label: string;
-  context: string | null;
-  completed: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Document {
-  id: number;
-  rfpId: number;
-  filename: string;
-  filepath: string;
-  mimeType: string;
-  uploadedAt: string;
-}
-
-interface Rfp {
-  id: number;
-  name: string;
-  agency: string;
-  status: RfpStatus;
-  createdAt: string;
-  updatedAt: string;
-  deadlines: Deadline[];
-  documents: Document[];
-}
+import type { RfpWithRelations, RfpStatus } from '@/types';
 
 interface RfpDetailProps {
-  rfp: Rfp;
+  rfp: RfpWithRelations;
   onUpdate: () => void;
   onDelete?: () => void;
 }
@@ -116,8 +83,8 @@ export default function RfpDetail({ rfp, onUpdate, onDelete }: RfpDetailProps) {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
+  const formatDate = (dateString: string | Date) => {
+    const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
     return date.toLocaleDateString('en-GB', {
       day: '2-digit',
       month: 'short',

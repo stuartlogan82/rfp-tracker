@@ -130,20 +130,20 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 6.12 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — click "Open New RFP Dialog", verify 3-step wizard works: Step 1 shows RFP form, Step 2 shows upload zone, Step 3 shows date review. Verify cancel closes the dialog
 
 - [ ] 7.0 Build Dashboard orchestrator and integrate into page
-  - [ ] 7.1 Create and checkout branch `feature/dashboard-orchestrator` from `feature/dashboard-ui`
-  - [ ] 7.2 Write failing tests for Dashboard: fetches data from `GET /api/rfps` on mount and renders Sidebar, SummaryCards, and DeadlineTable
-  - [ ] 7.3 Write failing tests for Dashboard: default view shows "Active only" filter — deadlines from non-Active RFPs are hidden
-  - [ ] 7.4 Write failing tests for Dashboard: toggling the filter shows/hides deadlines from non-Active RFPs, and summary cards update accordingly
-  - [ ] 7.5 Write failing tests for Dashboard: clicking an RFP in the sidebar or table shows the RfpDetail view; "Back to Dashboard" returns to the deadline table
-  - [ ] 7.6 Write failing tests for Dashboard: clicking "New RFP" opens the NewRfpDialog; completing the wizard refreshes dashboard data
-  - [ ] 7.7 Write failing tests for Dashboard: toggling a deadline's completed checkbox calls `PUT /api/deadlines/[id]` and refreshes data
-  - [ ] 7.8 Implement `Dashboard` component in `src/components/Dashboard.tsx` with state: `rfps`, `selectedRfpId`, `showAll` filter toggle, `dialogOpen`
-  - [ ] 7.9 Implement `refreshData()` function that fetches `GET /api/rfps` and updates state
-  - [ ] 7.10 Implement derived data: flatten deadlines with RFP info into `DeadlineWithRfp[]`, apply filter, compute summary counts
-  - [ ] 7.11 Compose layout: sidebar on left, main content (header with filter toggle, SummaryCards, DeadlineTable or RfpDetail) on right
-  - [ ] 7.12 Update `src/app/page.tsx` to render `Dashboard` instead of `UploadDemo`
-  - [ ] 7.13 Delete `src/app/preview/page.tsx` — temporary preview page no longer needed
-  - [ ] 7.14 Verify all Dashboard tests pass
-  - [ ] 7.15 Run full test suite (`npx jest`) — all existing and new tests pass
-  - [ ] 7.16 Run `npm run build` — production build succeeds with no errors
+  - [x] 7.1 Create and checkout branch `feature/dashboard-orchestrator` from `feature/dashboard-ui`
+  - [x] 7.2 Write failing tests for Dashboard: fetches data from `GET /api/rfps` on mount and renders Sidebar, SummaryCards, and DeadlineTable
+  - [x] 7.3 Write failing tests for Dashboard: default view shows "Active only" filter — deadlines from non-Active RFPs are hidden
+  - [x] 7.4 Write failing tests for Dashboard: toggling the filter shows/hides deadlines from non-Active RFPs, and summary cards update accordingly
+  - [x] 7.5 Write failing tests for Dashboard: clicking an RFP in the sidebar or table shows the RfpDetail view; "Back to Dashboard" returns to the deadline table
+  - [x] 7.6 Write failing tests for Dashboard: clicking "New RFP" opens the NewRfpDialog; completing the wizard refreshes dashboard data
+  - [x] 7.7 Write failing tests for Dashboard: toggling a deadline's completed checkbox calls `PUT /api/deadlines/[id]` and refreshes data
+  - [x] 7.8 Implement `Dashboard` component in `src/components/Dashboard.tsx` with state: `rfps`, `selectedRfpId`, `showAll` filter toggle, `dialogOpen`
+  - [x] 7.9 Implement `refreshData()` function that fetches `GET /api/rfps` and updates state
+  - [x] 7.10 Implement derived data: flatten deadlines with RFP info into `DeadlineWithRfp[]`, apply filter, compute summary counts
+  - [x] 7.11 Compose layout: sidebar on left, main content (header with filter toggle, SummaryCards, DeadlineTable or RfpDetail) on right
+  - [x] 7.12 Update `src/app/page.tsx` to render `Dashboard` instead of `UploadDemo`
+  - [x] 7.13 Delete `src/app/preview/page.tsx` — temporary preview page no longer needed
+  - [x] 7.14 Verify all Dashboard tests pass
+  - [x] 7.15 Run full test suite (`npx jest`) — all existing and new tests pass
+  - [x] 7.16 Run `npm run build` — production build succeeds with no errors
   - [ ] 7.17 **Manual UI check:** Run `npm run dev`, open http://localhost:3000 — verify full dashboard: sidebar shows RFPs, summary cards show correct counts, deadline table is colour-coded and sortable, "Active only" filter works, clicking an RFP shows detail view with "Back to Dashboard", "New RFP" dialog wizard completes end-to-end, toggling deadline completion updates the table
