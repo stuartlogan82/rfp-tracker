@@ -6,7 +6,7 @@
 
 import { useState, useMemo } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { getUrgencyLevel, getUrgencyColor } from '@/lib/urgency';
 import type { DeadlineWithRfp } from '@/types';
 
@@ -66,8 +66,10 @@ export default function DeadlineTable({
           break;
         case 'urgency':
           const urgencyOrder = { overdue: 0, critical: 1, warning: 2, safe: 3, completed: 4 };
-          aVal = urgencyOrder[getUrgencyLevel(a.date.toISOString().split('T')[0], a.completed, now)];
-          bVal = urgencyOrder[getUrgencyLevel(b.date.toISOString().split('T')[0], b.completed, now)];
+          const aDateString = typeof a.date === 'string' ? a.date.split('T')[0] : a.date.toISOString().split('T')[0];
+          const bDateString = typeof b.date === 'string' ? b.date.split('T')[0] : b.date.toISOString().split('T')[0];
+          aVal = urgencyOrder[getUrgencyLevel(aDateString, a.completed, now)];
+          bVal = urgencyOrder[getUrgencyLevel(bDateString, b.completed, now)];
           break;
         case 'completed':
           aVal = a.completed ? 1 : 0;
@@ -138,8 +140,17 @@ export default function DeadlineTable({
         </TableHeader>
         <TableBody>
           {sortedDeadlines.map((deadline) => {
+            // Handle both Date objects and date strings
+            const dateString = typeof deadline.date === 'string'
+              ? deadline.date.split('T')[0]
+              : deadline.date.toISOString().split('T')[0];
+
+            const dateObj = typeof deadline.date === 'string'
+              ? parseISO(deadline.date)
+              : deadline.date;
+
             const urgencyLevel = getUrgencyLevel(
-              deadline.date.toISOString().split('T')[0],
+              dateString,
               deadline.completed,
               now
             );
@@ -153,7 +164,7 @@ export default function DeadlineTable({
                 </TableCell>
 
                 {/* Date */}
-                <TableCell>{format(deadline.date, 'dd MMM yyyy')}</TableCell>
+                <TableCell>{format(dateObj, 'dd MMM yyyy')}</TableCell>
 
                 {/* Time */}
                 <TableCell>{deadline.time || '—'}</TableCell>
