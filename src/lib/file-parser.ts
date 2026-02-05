@@ -31,6 +31,11 @@ export async function extractText(
     };
   }
 
+  // Handle plain text files
+  if (mimeType.toLowerCase() === 'text/plain') {
+    return extractPlainText(filepath);
+  }
+
   // Handle supported document types
   switch (mimeType.toLowerCase()) {
     case 'application/pdf':
@@ -42,6 +47,13 @@ export async function extractText(
     default:
       throw new Error(`Unsupported file type: ${mimeType}`);
   }
+}
+
+async function extractPlainText(filepath: string): Promise<ExtractionResult> {
+  const text = await fs.readFile(filepath, 'utf-8');
+  return {
+    text,
+  };
 }
 
 async function extractPdf(filepath: string): Promise<ExtractionResult> {
