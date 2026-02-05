@@ -2,12 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { UploadZone } from './UploadZone';
+import DateReview from './DateReview';
+import type { ExtractedDate } from '@/lib/openai';
 
 export function UploadDemo() {
   const [rfpId, setRfpId] = useState<number | null>(null);
   const [documents, setDocuments] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>('');
+  const [extractedDates, setExtractedDates] = useState<ExtractedDate[] | null>(null);
+  const [extracting, setExtracting] = useState(false);
+  const [currentDocumentId, setCurrentDocumentId] = useState<number | null>(null);
 
   useEffect(() => {
     // Create a demo RFP on mount
@@ -41,8 +46,46 @@ export function UploadDemo() {
     createDemoRfp();
   }, []);
 
-  const handleUploadComplete = (document: any) => {
+  const handleUploadComplete = async (document: any) => {
     setDocuments((prev) => [...prev, document]);
+    setCurrentDocumentId(document.id);
+
+    // Automatically extract dates after upload
+    setExtracting(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/extract', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ documentId: document.id }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to extract dates');
+      }
+
+      const data = await response.json();
+      setExtractedDates(data.dates);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to extract dates');
+    } finally {
+      setExtracting(false);
+    }
+  };
+
+  const handleDatesSaved = () => {
+    setExtractedDates(null);
+    setCurrentDocumentId(null);
+    alert('Dates saved successfully!');
+  };
+
+  const handleCancelReview = () => {
+    setExtractedDates(null);
+    setCurrentDocumentId(null);
   };
 
   if (isLoading) {
@@ -71,6 +114,7 @@ export function UploadDemo() {
 
   return (
     <div className="space-y-6">
+      {/* Upload Section */}
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">
           Upload Document
@@ -78,7 +122,32 @@ export function UploadDemo() {
         <UploadZone rfpId={rfpId} onUploadComplete={handleUploadComplete} />
       </div>
 
-      {documents.length > 0 && (
+      {/* Extracting Dates Loader */}
+      {extracting && (
+        <div className="bg-white rounded-lg shadow p-8 text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 font-medium">Extracting dates with AI...</p>
+          <p className="text-sm text-gray-500 mt-2">This may take a moment for large documents</p>
+        </div>
+      )}
+
+      {/* Date Review Section */}
+      {extractedDates && rfpId && (
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            Review Extracted Dates
+          </h2>
+          <DateReview
+            dates={extractedDates}
+            rfpId={rfpId}
+            onSave={handleDatesSaved}
+            onCancel={handleCancelReview}
+          />
+        </div>
+      )}
+
+      {/* Uploaded Documents List */}
+      {documents.length > 0 && !extractedDates && (
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
             Uploaded Documents
@@ -115,13 +184,22 @@ export function UploadDemo() {
         </div>
       )}
 
+      {/* Error Display */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <h3 className="font-semibold text-red-900 mb-2">Error</h3>
+          <p className="text-sm text-red-700">{error}</p>
+        </div>
+      )}
+
+      {/* Demo Info */}
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
         <h3 className="font-semibold text-blue-900 mb-2">Demo Info</h3>
         <p className="text-sm text-blue-700">
           RFP ID: {rfpId} | Documents: {documents.length}
         </p>
         <p className="text-xs text-blue-600 mt-2">
-          Try uploading a PDF, DOCX, XLSX, or image file!
+          Upload a PDF, DOCX, XLSX, or image file to automatically extract deadline dates!
         </p>
       </div>
     </div>

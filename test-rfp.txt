@@ -1,0 +1,64 @@
+REQUEST FOR PROPOSAL
+Cloud Services Implementation
+UK Government Agency
+
+Reference: RFP-2024-CS-001
+
+IMPORTANT DATES AND DEADLINES
+
+1. Pre-bid Meeting
+   Date: March 15, 2024
+   Time: 10:00 AM GMT
+   Location: Virtual via Microsoft Teams
+
+2. Clarification Questions Deadline
+   All questions must be submitted by March 20, 2024 at 5:00 PM GMT
+
+3. Site Visit
+   Scheduled for March 25, 2024 at 2:00 PM
+   Attendance is mandatory
+
+4. Proposal Submission Deadline
+   Final date: April 5, 2024
+   Time: 12:00 noon GMT
+   Late submissions will not be accepted
+
+5. Evaluation Period
+   April 8-19, 2024
+
+6. Shortlist Notification
+   April 22, 2024
+
+7. Presentations and Interviews
+   Week of April 29, 2024
+
+8. Contract Award Notification
+   Expected: May 10, 2024
+
+9. Contract Start Date
+   June 1, 2024
+
+SCOPE OF WORK
+
+The selected vendor will provide cloud infrastructure services including:
+- Infrastructure as a Service (IaaS)
+- Platform as a Service (PaaS)
+- 24/7 support and maintenance
+- Data migration services
+- Training for up to 50 staff members
+
+CONTRACT DETAILS
+
+Duration: 3 years with option to extend for 2 additional years
+Estimated Value: £500,000 - £750,000
+
+SUBMISSION REQUIREMENTS
+
+All proposals must include:
+1. Technical solution description
+2. Implementation timeline
+3. Pricing breakdown
+4. Security compliance documentation
+5. References from at least 3 similar projects
+
+Contact: procurement@agency.gov.uk
