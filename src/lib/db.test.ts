@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { prisma } from './db';
 
 describe('Database Models', () => {

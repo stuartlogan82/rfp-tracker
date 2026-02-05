@@ -65,18 +65,18 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 2.5 Run initial migration (`npx prisma migrate dev --name init`)
   - [x] 2.6 Create Prisma client singleton in `src/lib/db.ts`
 
-- [ ] 3.0 File upload & document handling
-  - [ ] 3.1 Create and checkout a new feature branch (`git checkout -b feature/file-upload`)
-  - [ ] 3.2 Create the `src/app/api/upload/route.ts` API route that accepts multipart form data
-  - [ ] 3.3 Implement local file storage — save uploaded files to a `/uploads` directory on disk, store the path in the Document table
-  - [ ] 3.4 Add `/uploads` to `.gitignore`
-  - [ ] 3.5 Create `src/lib/file-parser.ts` with a unified `extractText(filepath, mimeType)` function
-  - [ ] 3.6 Implement PDF text extraction using `pdf-parse`
-  - [ ] 3.7 Implement DOCX text extraction using `mammoth`
-  - [ ] 3.8 Implement XLSX text extraction using `xlsx` (convert sheet contents to readable text)
-  - [ ] 3.9 For image files (PNG, JPG, TIFF), skip text extraction and flag them for vision-based AI processing
-  - [ ] 3.10 Build the `UploadZone` React component with drag-and-drop support and a file-picker fallback button
-  - [ ] 3.11 Show upload progress/status indicator in the UI (loading spinner, success/error state)
+- [x] 3.0 File upload & document handling
+  - [x] 3.1 Create and checkout a new feature branch (`git checkout -b feature/file-upload`)
+  - [x] 3.2 Create the `src/app/api/upload/route.ts` API route that accepts multipart form data
+  - [x] 3.3 Implement local file storage — save uploaded files to a `/uploads` directory on disk, store the path in the Document table
+  - [x] 3.4 Add `/uploads` to `.gitignore`
+  - [x] 3.5 Create `src/lib/file-parser.ts` with a unified `extractText(filepath, mimeType)` function
+  - [x] 3.6 Implement PDF text extraction using `pdf-parse`
+  - [x] 3.7 Implement DOCX text extraction using `mammoth`
+  - [x] 3.8 Implement XLSX text extraction using `xlsx` (convert sheet contents to readable text)
+  - [x] 3.9 For image files (PNG, JPG, TIFF), skip text extraction and flag them for vision-based AI processing
+  - [x] 3.10 Build the `UploadZone` React component with drag-and-drop support and a file-picker fallback button
+  - [x] 3.11 Show upload progress/status indicator in the UI (loading spinner, success/error state)
 
 - [ ] 4.0 AI-powered date extraction
   - [ ] 4.1 Create and checkout a new feature branch (`git checkout -b feature/ai-date-extraction`)
