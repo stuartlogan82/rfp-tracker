@@ -78,17 +78,17 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 3.10 Build the `UploadZone` React component with drag-and-drop support and a file-picker fallback button
   - [x] 3.11 Show upload progress/status indicator in the UI (loading spinner, success/error state)
 
-- [ ] 4.0 AI-powered date extraction
-  - [ ] 4.1 Create and checkout a new feature branch (`git checkout -b feature/ai-date-extraction`)
-  - [ ] 4.2 Create `src/lib/openai.ts` — initialize the OpenAI client using the API key from environment variables
-  - [ ] 4.3 Design the extraction prompt: instruct the model to return a JSON array of `{ "date": "YYYY-MM-DD", "time": "HH:MM" | null, "label": "string", "context": "string" }` objects, emphasizing extraction of *all* dates found in the document
-  - [ ] 4.4 Implement a `extractDates(text: string)` function that sends extracted text to OpenAI (GPT-4o) and parses the structured JSON response
-  - [ ] 4.5 Implement a `extractDatesFromImage(filepath: string)` function that sends image files to GPT-4o's vision API for date extraction
-  - [ ] 4.6 Add error handling for API failures, malformed responses, and rate limits
-  - [ ] 4.7 Handle large documents: if extracted text exceeds token limits, chunk the text into segments and merge results
-  - [ ] 4.8 Create `src/app/api/extract/route.ts` API route that accepts a document ID, extracts text (or uses vision), calls OpenAI, and returns extracted dates
-  - [ ] 4.9 Build the `DateReview` component — display AI-extracted dates in an editable table/list where the user can edit labels, correct dates, delete false positives, or add missed dates
-  - [ ] 4.10 Add a "Confirm & Save" button on the DateReview component that persists the reviewed dates to the Deadline table in the database
+- [x] 4.0 AI-powered date extraction
+  - [x] 4.1 Create and checkout a new feature branch (`git checkout -b feature/ai-date-extraction`)
+  - [x] 4.2 Create `src/lib/openai.ts` — initialize the OpenAI client using the API key from environment variables
+  - [x] 4.3 Design the extraction prompt: instruct the model to return a JSON array of `{ "date": "YYYY-MM-DD", "time": "HH:MM" | null, "label": "string", "context": "string" }` objects, emphasizing extraction of *all* dates found in the document
+  - [x] 4.4 Implement a `extractDates(text: string)` function that sends extracted text to OpenAI (GPT-4o) and parses the structured JSON response
+  - [x] 4.5 Implement a `extractDatesFromImage(filepath: string)` function that sends image files to GPT-4o's vision API for date extraction
+  - [x] 4.6 Add error handling for API failures, malformed responses, and rate limits
+  - [x] 4.7 Handle large documents: if extracted text exceeds token limits, chunk the text into segments and merge results
+  - [x] 4.8 Create `src/app/api/extract/route.ts` API route that accepts a document ID, extracts text (or uses vision), calls OpenAI, and returns extracted dates
+  - [x] 4.9 Build the `DateReview` component — display AI-extracted dates in an editable table/list where the user can edit labels, correct dates, delete false positives, or add missed dates
+  - [x] 4.10 Add a "Confirm & Save" button on the DateReview component that persists the reviewed dates to the Deadline table in the database
 
 - [ ] 5.0 RFP management
   - [ ] 5.1 Create and checkout a new feature branch (`git checkout -b feature/rfp-management`)
