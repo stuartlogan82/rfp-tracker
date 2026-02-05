@@ -129,7 +129,7 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 6.11 Update `src/app/preview/page.tsx` to add an "Open New RFP Dialog" button that opens the NewRfpDialog. Wire `onComplete` and `onClose` to `console.log`
   - [x] 6.12 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — click "Open New RFP Dialog", verify 3-step wizard works: Step 1 shows RFP form, Step 2 shows upload zone, Step 3 shows date review. Verify cancel closes the dialog
 
-- [ ] 7.0 Build Dashboard orchestrator and integrate into page
+- [x] 7.0 Build Dashboard orchestrator and integrate into page
   - [x] 7.1 Create and checkout branch `feature/dashboard-orchestrator` from `feature/dashboard-ui`
   - [x] 7.2 Write failing tests for Dashboard: fetches data from `GET /api/rfps` on mount and renders Sidebar, SummaryCards, and DeadlineTable
   - [x] 7.3 Write failing tests for Dashboard: default view shows "Active only" filter — deadlines from non-Active RFPs are hidden
@@ -146,4 +146,4 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 7.14 Verify all Dashboard tests pass
   - [x] 7.15 Run full test suite (`npx jest`) — all existing and new tests pass
   - [x] 7.16 Run `npm run build` — production build succeeds with no errors
-  - [ ] 7.17 **Manual UI check:** Run `npm run dev`, open http://localhost:3000 — verify full dashboard: sidebar shows RFPs, summary cards show correct counts, deadline table is colour-coded and sortable, "Active only" filter works, clicking an RFP shows detail view with "Back to Dashboard", "New RFP" dialog wizard completes end-to-end, toggling deadline completion updates the table
+  - [x] 7.17 **Manual UI check:** Run `npm run dev`, open http://localhost:3000 — verify full dashboard: sidebar shows RFPs, summary cards show correct counts, deadline table is colour-coded and sortable, "Active only" filter works, clicking an RFP shows detail view with "Back to Dashboard", "New RFP" dialog wizard completes end-to-end, toggling deadline completion updates the table
