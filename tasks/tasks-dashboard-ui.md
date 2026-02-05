@@ -68,16 +68,18 @@ Update the file after completing each sub-task, not just after completing an ent
 - [x] 2.0 Create shared types and urgency utility
 
 - [ ] 3.0 Build Sidebar component
-  - [ ] 3.1 Create and checkout branch `feature/dashboard-sidebar` from `feature/dashboard-ui`
-  - [ ] 3.2 Write failing tests for Sidebar: renders list of RFP names, displays agency and status badge for each RFP, shows deadline count per RFP
-  - [ ] 3.3 Write failing tests for Sidebar: highlights the currently selected RFP, calls `onSelectRfp` callback when an RFP is clicked
-  - [ ] 3.4 Write failing tests for Sidebar: renders a "New RFP" button that calls `onNewRfp` callback when clicked
-  - [ ] 3.5 Write failing test for Sidebar: displays status badges with correct colours (Blue=Active, Green=Won, Red=Lost, Grey=NoBid/Archived)
-  - [ ] 3.6 Implement `Sidebar` component in `src/components/Sidebar.tsx` with props: `rfps`, `selectedRfpId`, `onSelectRfp`, `onNewRfp`
-  - [ ] 3.7 Style Sidebar: fixed width ~288px, scrollable RFP list using `ScrollArea`, `Separator` between header and list
-  - [ ] 3.8 Verify all Sidebar tests pass
-  - [ ] 3.9 Update `src/app/preview/page.tsx` to render the Sidebar with 3–4 sample RFPs (mix of statuses), one pre-selected. Wire `onSelectRfp` and `onNewRfp` to `console.log`
-  - [ ] 3.10 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify Sidebar renders RFP list with status badges, selected RFP is highlighted, "New RFP" button is visible. Click items and check browser console for callbacks
+  - [x] 3.1 Create and checkout branch `feature/dashboard-sidebar` from `feature/dashboard-ui`
+  - [x] 3.2 Write failing tests for Sidebar: renders list of RFP names, displays agency and status badge for each RFP, shows deadline count per RFP
+  - [x] 3.3 Write failing tests for Sidebar: highlights the currently selected RFP, calls `onSelectRfp` callback when an RFP is clicked
+  - [x] 3.4 Write failing tests for Sidebar: renders a "New RFP" button that calls `onNewRfp` callback when clicked
+  - [x] 3.5 Write failing test for Sidebar: displays status badges with correct colours (Blue=Active, Green=Won, Red=Lost, Grey=NoBid/Archived)
+  - [x] 3.6 Implement `Sidebar` component in `src/components/Sidebar.tsx` with props: `rfps`, `selectedRfpId`, `onSelectRfp`, `onNewRfp`
+  - [x] 3.7 Style Sidebar: fixed width ~288px, scrollable RFP list using `ScrollArea`, `Separator` between header and list
+  - [x] 3.8 Verify all Sidebar tests pass
+  - [x] 3.9 Update `src/app/preview/page.tsx` to render the Sidebar with 3–4 sample RFPs (mix of statuses), one pre-selected. Wire `onSelectRfp` and `onNewRfp` to `console.log`
+  - [x] 3.10 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify Sidebar renders RFP list with status badges, selected RFP is highlighted, "New RFP" button is visible. Click items and check browser console for callbacks
+
+- [x] 3.0 Build Sidebar component
 
 - [ ] 4.0 Build SummaryCards component
   - [ ] 4.1 Create and checkout branch `feature/dashboard-summary-cards` from `feature/dashboard-ui`

@@ -1,12 +1,94 @@
 /**
- * Temporary preview page for visualizing urgency levels
+ * Temporary preview page for visualizing urgency levels and Sidebar
  * This page will be deleted after the dashboard is complete
  */
 
+'use client';
+
 import { getUrgencyLevel, getUrgencyColor } from '@/lib/urgency';
-import type { UrgencyLevel } from '@/types';
+import Sidebar from '@/components/Sidebar';
+import type { RfpWithRelations } from '@/types';
 
 export default function PreviewPage() {
+  // Sample RFPs for Sidebar
+  const sampleRfps: RfpWithRelations[] = [
+    {
+      id: 1,
+      name: 'NHS Digital Transformation',
+      agency: 'NHS England',
+      status: 'Active',
+      createdAt: new Date('2026-01-15'),
+      updatedAt: new Date('2026-01-15'),
+      deadlines: [
+        {
+          id: 1,
+          rfpId: 1,
+          date: new Date('2026-02-20'),
+          time: '17:00',
+          label: 'Proposal deadline',
+          context: null,
+          completed: false,
+          createdAt: new Date('2026-01-15'),
+          updatedAt: new Date('2026-01-15'),
+        },
+        {
+          id: 2,
+          rfpId: 1,
+          date: new Date('2026-02-25'),
+          time: null,
+          label: 'Demo presentation',
+          context: null,
+          completed: false,
+          createdAt: new Date('2026-01-15'),
+          updatedAt: new Date('2026-01-15'),
+        },
+      ],
+      documents: [],
+    },
+    {
+      id: 2,
+      name: 'Ministry of Defence Cloud Infrastructure',
+      agency: 'MOD',
+      status: 'Won',
+      createdAt: new Date('2026-01-10'),
+      updatedAt: new Date('2026-01-10'),
+      deadlines: [
+        {
+          id: 3,
+          rfpId: 2,
+          date: new Date('2026-03-01'),
+          time: '12:00',
+          label: 'Contract signing',
+          context: null,
+          completed: true,
+          createdAt: new Date('2026-01-10'),
+          updatedAt: new Date('2026-01-10'),
+        },
+      ],
+      documents: [],
+    },
+    {
+      id: 3,
+      name: 'Transport for London Communications System',
+      agency: 'TfL',
+      status: 'Lost',
+      createdAt: new Date('2026-01-05'),
+      updatedAt: new Date('2026-01-05'),
+      deadlines: [],
+      documents: [],
+    },
+    {
+      id: 4,
+      name: 'Birmingham Council Project',
+      agency: 'Birmingham CC',
+      status: 'NoBid',
+      createdAt: new Date('2026-01-01'),
+      updatedAt: new Date('2026-01-01'),
+      deadlines: [],
+      documents: [],
+    },
+  ];
+
   // Sample dates for testing all urgency levels
   const now = new Date();
   const today = now.toISOString().split('T')[0];
@@ -25,9 +107,19 @@ export default function PreviewPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Urgency Level Preview</h1>
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Sidebar */}
+      <Sidebar
+        rfps={sampleRfps}
+        selectedRfpId={2}
+        onSelectRfp={(id) => console.log('Selected RFP:', id)}
+        onNewRfp={() => console.log('New RFP clicked')}
+      />
+
+      {/* Main content */}
+      <div className="flex-1 p-8">
+        <div className="max-w-2xl">
+          <h1 className="text-3xl font-bold mb-8">Component Preview</h1>
 
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold mb-4">Color Scheme Test</h2>
@@ -79,6 +171,7 @@ export default function PreviewPage() {
             </ul>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
