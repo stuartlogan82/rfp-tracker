@@ -7,7 +7,8 @@
 
 import { getUrgencyLevel, getUrgencyColor } from '@/lib/urgency';
 import Sidebar from '@/components/Sidebar';
-import type { RfpWithRelations } from '@/types';
+import SummaryCards from '@/components/SummaryCards';
+import type { RfpWithRelations, DeadlineWithRfp } from '@/types';
 
 export default function PreviewPage() {
   // Sample RFPs for Sidebar
@@ -106,6 +107,70 @@ export default function PreviewPage() {
     { date: yesterday, completed: true, label: 'Completed (overdue)' },
   ];
 
+  // Sample deadlines for SummaryCards
+  const sampleDeadlines: DeadlineWithRfp[] = [
+    // Overdue
+    {
+      id: 101,
+      rfpId: 1,
+      date: new Date(yesterday),
+      time: null,
+      label: 'Overdue deadline',
+      context: null,
+      completed: false,
+      createdAt: new Date('2026-01-15'),
+      updatedAt: new Date('2026-01-15'),
+      rfpName: 'NHS Digital Transformation',
+      rfpAgency: 'NHS England',
+      rfpStatus: 'Active',
+    },
+    // Due this week
+    {
+      id: 102,
+      rfpId: 1,
+      date: new Date(twoDaysAway),
+      time: '17:00',
+      label: 'Due this week',
+      context: null,
+      completed: false,
+      createdAt: new Date('2026-01-15'),
+      updatedAt: new Date('2026-01-15'),
+      rfpName: 'NHS Digital Transformation',
+      rfpAgency: 'NHS England',
+      rfpStatus: 'Active',
+    },
+    // Upcoming 7 days
+    {
+      id: 103,
+      rfpId: 2,
+      date: new Date(fiveDaysAway),
+      time: null,
+      label: 'Upcoming deadline',
+      context: null,
+      completed: false,
+      createdAt: new Date('2026-01-10'),
+      updatedAt: new Date('2026-01-10'),
+      rfpName: 'Ministry of Defence Cloud Infrastructure',
+      rfpAgency: 'MOD',
+      rfpStatus: 'Active',
+    },
+    // Far future
+    {
+      id: 104,
+      rfpId: 3,
+      date: new Date(tenDaysAway),
+      time: null,
+      label: 'Future deadline',
+      context: null,
+      completed: false,
+      createdAt: new Date('2026-01-05'),
+      updatedAt: new Date('2026-01-05'),
+      rfpName: 'Transport for London Communications System',
+      rfpAgency: 'TfL',
+      rfpStatus: 'Won',
+    },
+  ];
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
@@ -118,8 +183,25 @@ export default function PreviewPage() {
 
       {/* Main content */}
       <div className="flex-1 p-8">
-        <div className="max-w-2xl">
+        <div className="max-w-6xl">
           <h1 className="text-3xl font-bold mb-8">Component Preview</h1>
+
+          {/* Summary Cards */}
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold mb-4">Summary Cards</h2>
+            <SummaryCards
+              deadlines={sampleDeadlines}
+              rfps={sampleRfps.map(rfp => ({
+                id: rfp.id,
+                name: rfp.name,
+                agency: rfp.agency,
+                status: rfp.status,
+                createdAt: rfp.createdAt,
+                updatedAt: rfp.updatedAt,
+              }))}
+              now={now}
+            />
+          </div>
 
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold mb-4">Color Scheme Test</h2>

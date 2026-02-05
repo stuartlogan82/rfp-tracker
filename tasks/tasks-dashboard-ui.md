@@ -82,18 +82,20 @@ Update the file after completing each sub-task, not just after completing an ent
 - [x] 3.0 Build Sidebar component
 
 - [ ] 4.0 Build SummaryCards component
-  - [ ] 4.1 Create and checkout branch `feature/dashboard-summary-cards` from `feature/dashboard-ui`
-  - [ ] 4.2 Write failing tests for SummaryCards: renders 4 cards with correct titles — "Due This Week", "Overdue", "Active RFPs", "Upcoming 7 Days"
-  - [ ] 4.3 Write failing tests for SummaryCards: correctly computes "Overdue" count (incomplete deadlines before today, Europe/London)
-  - [ ] 4.4 Write failing tests for SummaryCards: correctly computes "Due This Week" count (incomplete deadlines within current Mon–Sun week, Europe/London)
-  - [ ] 4.5 Write failing tests for SummaryCards: correctly computes "Upcoming 7 Days" count (incomplete deadlines within next 7 calendar days)
-  - [ ] 4.6 Write failing tests for SummaryCards: correctly computes "Active RFPs" count from provided RFP data
-  - [ ] 4.7 Write failing test for SummaryCards: completed deadlines are excluded from all date-based counts
-  - [ ] 4.8 Implement `SummaryCards` component in `src/components/SummaryCards.tsx` with props: `deadlines: DeadlineWithRfp[]`, `rfps: Rfp[]`, `now?: Date`
-  - [ ] 4.9 Style SummaryCards as a responsive grid of shadcn `Card` components
-  - [ ] 4.10 Verify all SummaryCards tests pass
-  - [ ] 4.11 Update `src/app/preview/page.tsx` to render SummaryCards with sample deadline and RFP data (include overdue, due-this-week, upcoming, and completed deadlines)
-  - [ ] 4.12 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify 4 summary cards render with correct counts matching the sample data
+  - [x] 4.1 Create and checkout branch `feature/dashboard-summary-cards` from `feature/dashboard-ui`
+  - [x] 4.2 Write failing tests for SummaryCards: renders 4 cards with correct titles — "Due This Week", "Overdue", "Active RFPs", "Upcoming 7 Days"
+  - [x] 4.3 Write failing tests for SummaryCards: correctly computes "Overdue" count (incomplete deadlines before today, Europe/London)
+  - [x] 4.4 Write failing tests for SummaryCards: correctly computes "Due This Week" count (incomplete deadlines within current Mon–Sun week, Europe/London)
+  - [x] 4.5 Write failing tests for SummaryCards: correctly computes "Upcoming 7 Days" count (incomplete deadlines within next 7 calendar days)
+  - [x] 4.6 Write failing tests for SummaryCards: correctly computes "Active RFPs" count from provided RFP data
+  - [x] 4.7 Write failing test for SummaryCards: completed deadlines are excluded from all date-based counts
+  - [x] 4.8 Implement `SummaryCards` component in `src/components/SummaryCards.tsx` with props: `deadlines: DeadlineWithRfp[]`, `rfps: Rfp[]`, `now?: Date`
+  - [x] 4.9 Style SummaryCards as a responsive grid of shadcn `Card` components
+  - [x] 4.10 Verify all SummaryCards tests pass
+  - [x] 4.11 Update `src/app/preview/page.tsx` to render SummaryCards with sample deadline and RFP data (include overdue, due-this-week, upcoming, and completed deadlines)
+  - [x] 4.12 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify 4 summary cards render with correct counts matching the sample data
+
+- [x] 4.0 Build SummaryCards component
 
 - [ ] 5.0 Build DeadlineTable component
   - [ ] 5.1 Create and checkout branch `feature/dashboard-deadline-table` from `feature/dashboard-ui`
