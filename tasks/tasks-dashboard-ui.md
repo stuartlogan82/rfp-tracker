@@ -49,6 +49,7 @@ Update the file after completing each sub-task, not just after completing an ent
   - [ ] 1.5 Add `ResizeObserver` polyfill to `jest.setup.ts` for Radix UI compatibility in tests
   - [ ] 1.6 Verify `npm run build` still passes with shadcn/ui installed
   - [ ] 1.7 Verify all existing tests still pass (`npx jest`)
+  - [ ] 1.8 **Manual UI check:** Run `npm run dev`, open http://localhost:3000 — existing app still works. Check `src/components/ui/` directory contains the installed shadcn components
 
 - [ ] 2.0 Create shared types and urgency utility
   - [ ] 2.1 Create and checkout branch `feature/dashboard-types-urgency` from `feature/dashboard-ui`
@@ -59,6 +60,8 @@ Update the file after completing each sub-task, not just after completing an ent
   - [ ] 2.6 Implement `getUrgencyLevel(date: string, completed: boolean, now?: Date)` in `src/lib/urgency.ts` using `date-fns` and `date-fns-tz` with Europe/London timezone
   - [ ] 2.7 Implement `getUrgencyColor(level: UrgencyLevel)` returning `{ dot: string, bg: string }` Tailwind class strings
   - [ ] 2.8 Verify all urgency tests pass
+  - [ ] 2.9 Create `src/app/preview/page.tsx` — a temporary preview page that renders a sample list of urgency levels with their colour dots (all 5 levels: overdue, critical, warning, safe, completed) using hardcoded test dates so you can visually verify the colour scheme
+  - [ ] 2.10 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify all 5 urgency colour dots render correctly (red, red, amber, green, grey)
 
 - [ ] 3.0 Build Sidebar component
   - [ ] 3.1 Create and checkout branch `feature/dashboard-sidebar` from `feature/dashboard-ui`
@@ -69,6 +72,8 @@ Update the file after completing each sub-task, not just after completing an ent
   - [ ] 3.6 Implement `Sidebar` component in `src/components/Sidebar.tsx` with props: `rfps`, `selectedRfpId`, `onSelectRfp`, `onNewRfp`
   - [ ] 3.7 Style Sidebar: fixed width ~288px, scrollable RFP list using `ScrollArea`, `Separator` between header and list
   - [ ] 3.8 Verify all Sidebar tests pass
+  - [ ] 3.9 Update `src/app/preview/page.tsx` to render the Sidebar with 3–4 sample RFPs (mix of statuses), one pre-selected. Wire `onSelectRfp` and `onNewRfp` to `console.log`
+  - [ ] 3.10 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify Sidebar renders RFP list with status badges, selected RFP is highlighted, "New RFP" button is visible. Click items and check browser console for callbacks
 
 - [ ] 4.0 Build SummaryCards component
   - [ ] 4.1 Create and checkout branch `feature/dashboard-summary-cards` from `feature/dashboard-ui`
@@ -81,6 +86,8 @@ Update the file after completing each sub-task, not just after completing an ent
   - [ ] 4.8 Implement `SummaryCards` component in `src/components/SummaryCards.tsx` with props: `deadlines: DeadlineWithRfp[]`, `rfps: Rfp[]`, `now?: Date`
   - [ ] 4.9 Style SummaryCards as a responsive grid of shadcn `Card` components
   - [ ] 4.10 Verify all SummaryCards tests pass
+  - [ ] 4.11 Update `src/app/preview/page.tsx` to render SummaryCards with sample deadline and RFP data (include overdue, due-this-week, upcoming, and completed deadlines)
+  - [ ] 4.12 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify 4 summary cards render with correct counts matching the sample data
 
 - [ ] 5.0 Build DeadlineTable component
   - [ ] 5.1 Create and checkout branch `feature/dashboard-deadline-table` from `feature/dashboard-ui`
@@ -95,6 +102,8 @@ Update the file after completing each sub-task, not just after completing an ent
   - [ ] 5.10 Implement `DeadlineTable` component in `src/components/DeadlineTable.tsx` with props: `deadlines: DeadlineWithRfp[]`, `onSelectRfp`, `onToggleComplete`, `now?: Date`
   - [ ] 5.11 Style table rows with urgency background colours (red-50, amber-50, green-50, grey-50) using `getUrgencyColor()`
   - [ ] 5.12 Verify all DeadlineTable tests pass
+  - [ ] 5.13 Update `src/app/preview/page.tsx` to render DeadlineTable with sample deadlines covering all urgency levels (overdue, critical, warning, safe, completed, and one with null time). Wire `onSelectRfp` and `onToggleComplete` to `console.log`
+  - [ ] 5.14 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify table renders with colour-coded rows, sortable columns work, "—" shows for null times, clicking RFP name and checkbox logs to console
 
 - [ ] 6.0 Build NewRfpDialog component
   - [ ] 6.1 Create and checkout branch `feature/dashboard-new-rfp-dialog` from `feature/dashboard-ui`
@@ -107,6 +116,8 @@ Update the file after completing each sub-task, not just after completing an ent
   - [ ] 6.8 Wire multi-step wizard state: `step` (1/2/3), `createdRfpId`, pass data between steps
   - [ ] 6.9 Wrap content in shadcn `Dialog` component with appropriate title per step
   - [ ] 6.10 Verify all NewRfpDialog tests pass
+  - [ ] 6.11 Update `src/app/preview/page.tsx` to add an "Open New RFP Dialog" button that opens the NewRfpDialog. Wire `onComplete` and `onClose` to `console.log`
+  - [ ] 6.12 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — click "Open New RFP Dialog", verify 3-step wizard works: Step 1 shows RFP form, Step 2 shows upload zone, Step 3 shows date review. Verify cancel closes the dialog
 
 - [ ] 7.0 Build Dashboard orchestrator and integrate into page
   - [ ] 7.1 Create and checkout branch `feature/dashboard-orchestrator` from `feature/dashboard-ui`
@@ -121,6 +132,8 @@ Update the file after completing each sub-task, not just after completing an ent
   - [ ] 7.10 Implement derived data: flatten deadlines with RFP info into `DeadlineWithRfp[]`, apply filter, compute summary counts
   - [ ] 7.11 Compose layout: sidebar on left, main content (header with filter toggle, SummaryCards, DeadlineTable or RfpDetail) on right
   - [ ] 7.12 Update `src/app/page.tsx` to render `Dashboard` instead of `UploadDemo`
-  - [ ] 7.13 Verify all Dashboard tests pass
-  - [ ] 7.14 Run full test suite (`npx jest`) — all existing and new tests pass
-  - [ ] 7.15 Run `npm run build` — production build succeeds with no errors
+  - [ ] 7.13 Delete `src/app/preview/page.tsx` — temporary preview page no longer needed
+  - [ ] 7.14 Verify all Dashboard tests pass
+  - [ ] 7.15 Run full test suite (`npx jest`) — all existing and new tests pass
+  - [ ] 7.16 Run `npm run build` — production build succeeds with no errors
+  - [ ] 7.17 **Manual UI check:** Run `npm run dev`, open http://localhost:3000 — verify full dashboard: sidebar shows RFPs, summary cards show correct counts, deadline table is colour-coded and sortable, "Active only" filter works, clicking an RFP shows detail view with "Back to Dashboard", "New RFP" dialog wizard completes end-to-end, toggling deadline completion updates the table
