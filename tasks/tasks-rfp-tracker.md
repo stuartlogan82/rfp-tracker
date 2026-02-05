@@ -57,13 +57,13 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 1.9 Create `.env.local` with `OPENAI_API_KEY` placeholder and add `.env.local` to `.gitignore`
   - [x] 1.10 Verify the dev server runs successfully (`npm run dev`)
 
-- [ ] 2.0 Database schema & ORM setup
-  - [ ] 2.1 Create and checkout a new feature branch (`git checkout -b feature/database-schema`)
-  - [ ] 2.2 Define `Rfp` model in `prisma/schema.prisma` with fields: `id`, `name`, `agency`, `status` (enum: Active, Won, Lost, NoBid, Archived), `createdAt`, `updatedAt`
-  - [ ] 2.3 Define `Deadline` model with fields: `id`, `rfpId` (relation to Rfp), `date` (DateTime), `time` (String, nullable), `label`, `context` (nullable), `completed` (Boolean, default false), `createdAt`, `updatedAt`
-  - [ ] 2.4 Define `Document` model with fields: `id`, `rfpId` (relation to Rfp), `filename`, `filepath`, `mimeType`, `uploadedAt`
-  - [ ] 2.5 Run initial migration (`npx prisma migrate dev --name init`)
-  - [ ] 2.6 Create Prisma client singleton in `src/lib/db.ts`
+- [x] 2.0 Database schema & ORM setup
+  - [x] 2.1 Create and checkout a new feature branch (`git checkout -b feature/database-schema`)
+  - [x] 2.2 Define `Rfp` model in `prisma/schema.prisma` with fields: `id`, `name`, `agency`, `status` (enum: Active, Won, Lost, NoBid, Archived), `createdAt`, `updatedAt`
+  - [x] 2.3 Define `Deadline` model with fields: `id`, `rfpId` (relation to Rfp), `date` (DateTime), `time` (String, nullable), `label`, `context` (nullable), `completed` (Boolean, default false), `createdAt`, `updatedAt`
+  - [x] 2.4 Define `Document` model with fields: `id`, `rfpId` (relation to Rfp), `filename`, `filepath`, `mimeType`, `uploadedAt`
+  - [x] 2.5 Run initial migration (`npx prisma migrate dev --name init`)
+  - [x] 2.6 Create Prisma client singleton in `src/lib/db.ts`
 
 - [ ] 3.0 File upload & document handling
   - [ ] 3.1 Create and checkout a new feature branch (`git checkout -b feature/file-upload`)

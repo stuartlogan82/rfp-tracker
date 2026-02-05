@@ -1,0 +1,34 @@
+-- CreateTable
+CREATE TABLE "Rfp" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "agency" TEXT NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'Active',
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Deadline" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "rfpId" INTEGER NOT NULL,
+    "date" DATETIME NOT NULL,
+    "time" TEXT,
+    "label" TEXT NOT NULL,
+    "context" TEXT,
+    "completed" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "Deadline_rfpId_fkey" FOREIGN KEY ("rfpId") REFERENCES "Rfp" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Document" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "rfpId" INTEGER NOT NULL,
+    "filename" TEXT NOT NULL,
+    "filepath" TEXT NOT NULL,
+    "mimeType" TEXT NOT NULL,
+    "uploadedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Document_rfpId_fkey" FOREIGN KEY ("rfpId") REFERENCES "Rfp" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
