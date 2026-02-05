@@ -98,20 +98,22 @@ Update the file after completing each sub-task, not just after completing an ent
 - [x] 4.0 Build SummaryCards component
 
 - [ ] 5.0 Build DeadlineTable component
-  - [ ] 5.1 Create and checkout branch `feature/dashboard-deadline-table` from `feature/dashboard-ui`
-  - [ ] 5.2 Write failing tests for DeadlineTable: renders table headers (urgency, date, time, label, RFP name, completed)
-  - [ ] 5.3 Write failing tests for DeadlineTable: renders deadline rows with correct data, dates formatted as dd MMM yyyy (UK), time shows "—" when null
-  - [ ] 5.4 Write failing tests for DeadlineTable: displays urgency colour dot matching the deadline's urgency level
-  - [ ] 5.5 Write failing tests for DeadlineTable: rows are sorted by date ascending by default
-  - [ ] 5.6 Write failing tests for DeadlineTable: clicking a column header toggles sort direction; clicking a different header sorts by that column ascending
-  - [ ] 5.7 Write failing tests for DeadlineTable: RFP name in each row is clickable and calls `onSelectRfp` with the correct RFP ID
-  - [ ] 5.8 Write failing tests for DeadlineTable: clicking the completed checkbox calls `onToggleComplete` with the deadline ID and new completed state
-  - [ ] 5.9 Write failing test for DeadlineTable: shows empty state message when no deadlines are provided
-  - [ ] 5.10 Implement `DeadlineTable` component in `src/components/DeadlineTable.tsx` with props: `deadlines: DeadlineWithRfp[]`, `onSelectRfp`, `onToggleComplete`, `now?: Date`
-  - [ ] 5.11 Style table rows with urgency background colours (red-50, amber-50, green-50, grey-50) using `getUrgencyColor()`
-  - [ ] 5.12 Verify all DeadlineTable tests pass
-  - [ ] 5.13 Update `src/app/preview/page.tsx` to render DeadlineTable with sample deadlines covering all urgency levels (overdue, critical, warning, safe, completed, and one with null time). Wire `onSelectRfp` and `onToggleComplete` to `console.log`
-  - [ ] 5.14 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify table renders with colour-coded rows, sortable columns work, "—" shows for null times, clicking RFP name and checkbox logs to console
+  - [x] 5.1 Create and checkout branch `feature/dashboard-deadline-table` from `feature/dashboard-ui`
+  - [x] 5.2 Write failing tests for DeadlineTable: renders table headers (urgency, date, time, label, RFP name, completed)
+  - [x] 5.3 Write failing tests for DeadlineTable: renders deadline rows with correct data, dates formatted as dd MMM yyyy (UK), time shows "—" when null
+  - [x] 5.4 Write failing tests for DeadlineTable: displays urgency colour dot matching the deadline's urgency level
+  - [x] 5.5 Write failing tests for DeadlineTable: rows are sorted by date ascending by default
+  - [x] 5.6 Write failing tests for DeadlineTable: clicking a column header toggles sort direction; clicking a different header sorts by that column ascending
+  - [x] 5.7 Write failing tests for DeadlineTable: RFP name in each row is clickable and calls `onSelectRfp` with the correct RFP ID
+  - [x] 5.8 Write failing tests for DeadlineTable: clicking the completed checkbox calls `onToggleComplete` with the deadline ID and new completed state
+  - [x] 5.9 Write failing test for DeadlineTable: shows empty state message when no deadlines are provided
+  - [x] 5.10 Implement `DeadlineTable` component in `src/components/DeadlineTable.tsx` with props: `deadlines: DeadlineWithRfp[]`, `onSelectRfp`, `onToggleComplete`, `now?: Date`
+  - [x] 5.11 Style table rows with urgency background colours (red-50, amber-50, green-50, grey-50) using `getUrgencyColor()`
+  - [x] 5.12 Verify all DeadlineTable tests pass
+  - [x] 5.13 Update `src/app/preview/page.tsx` to render DeadlineTable with sample deadlines covering all urgency levels (overdue, critical, warning, safe, completed, and one with null time). Wire `onSelectRfp` and `onToggleComplete` to `console.log`
+  - [x] 5.14 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify table renders with colour-coded rows, sortable columns work, "—" shows for null times, clicking RFP name and checkbox logs to console
+
+- [x] 5.0 Build DeadlineTable component
 
 - [ ] 6.0 Build NewRfpDialog component
   - [ ] 6.1 Create and checkout branch `feature/dashboard-new-rfp-dialog` from `feature/dashboard-ui`

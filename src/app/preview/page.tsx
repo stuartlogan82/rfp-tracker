@@ -8,6 +8,7 @@
 import { getUrgencyLevel, getUrgencyColor } from '@/lib/urgency';
 import Sidebar from '@/components/Sidebar';
 import SummaryCards from '@/components/SummaryCards';
+import DeadlineTable from '@/components/DeadlineTable';
 import type { RfpWithRelations, DeadlineWithRfp } from '@/types';
 
 export default function PreviewPage() {
@@ -199,6 +200,17 @@ export default function PreviewPage() {
                 createdAt: rfp.createdAt,
                 updatedAt: rfp.updatedAt,
               }))}
+              now={now}
+            />
+          </div>
+
+          {/* Deadline Table */}
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold mb-4">Deadline Table</h2>
+            <DeadlineTable
+              deadlines={sampleDeadlines}
+              onSelectRfp={(id) => console.log('Selected RFP:', id)}
+              onToggleComplete={(id, completed) => console.log('Toggle deadline:', id, completed)}
               now={now}
             />
           </div>
