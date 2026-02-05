@@ -90,17 +90,17 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 4.9 Build the `DateReview` component — display AI-extracted dates in an editable table/list where the user can edit labels, correct dates, delete false positives, or add missed dates
   - [x] 4.10 Add a "Confirm & Save" button on the DateReview component that persists the reviewed dates to the Deadline table in the database
 
-- [ ] 5.0 RFP management
-  - [ ] 5.1 Create and checkout a new feature branch (`git checkout -b feature/rfp-management`)
-  - [ ] 5.2 Create `src/app/api/rfps/route.ts` with GET (list all RFPs) and POST (create new RFP) handlers
-  - [ ] 5.3 Create `src/app/api/rfps/[id]/route.ts` with GET (single RFP with deadlines), PUT (update RFP), and DELETE (delete RFP and associated data) handlers
-  - [ ] 5.4 Create `src/app/api/deadlines/route.ts` with POST (create deadline) handler
-  - [ ] 5.5 Create `src/app/api/deadlines/[id]/route.ts` with PUT (update deadline) and DELETE (delete deadline) handlers
-  - [ ] 5.6 Build the `RfpForm` component — a form/modal for creating a new RFP (name, agency, status) that also triggers the upload flow
-  - [ ] 5.7 Build the `RfpDetail` component — displays RFP info, its deadlines, and attached documents, with edit capabilities
-  - [ ] 5.8 Implement RFP status management — ability to change status between Active, Won, Lost, No-Bid, and Archived
-  - [ ] 5.9 Implement manual deadline add/edit/delete within the RFP detail view
-  - [ ] 5.10 Wire up the full upload-to-extraction flow: user uploads document → file is saved → text extracted → AI extracts dates → user reviews → dates saved → RFP created or updated
+- [x] 5.0 RFP management
+  - [x] 5.1 Create and checkout a new feature branch (`git checkout -b feature/rfp-management`)
+  - [x] 5.2 Create `src/app/api/rfps/route.ts` with GET (list all RFPs) and POST (create new RFP) handlers
+  - [x] 5.3 Create `src/app/api/rfps/[id]/route.ts` with GET (single RFP with deadlines), PUT (update RFP), and DELETE (delete RFP and associated data) handlers
+  - [x] 5.4 Create `src/app/api/deadlines/route.ts` with POST (create deadline) handler
+  - [x] 5.5 Create `src/app/api/deadlines/[id]/route.ts` with PUT (update deadline) and DELETE (delete deadline) handlers
+  - [x] 5.6 Build the `RfpForm` component — a form/modal for creating a new RFP (name, agency, status) that also triggers the upload flow
+  - [x] 5.7 Build the `RfpDetail` component — displays RFP info, its deadlines, and attached documents, with edit capabilities
+  - [x] 5.8 Implement RFP status management — ability to change status between Active, Won, Lost, No-Bid, and Archived
+  - [x] 5.9 Implement manual deadline add/edit/delete within the RFP detail view
+  - [x] 5.10 Wire up the full upload-to-extraction flow: user uploads document → file is saved → text extracted → AI extracts dates → user reviews → dates saved → RFP created or updated
 
 - [ ] 6.0 Dashboard UI & deadline visualization
   - [ ] 6.1 Create and checkout a new feature branch (`git checkout -b feature/dashboard-ui`)
