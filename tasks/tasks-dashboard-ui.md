@@ -54,16 +54,18 @@ Update the file after completing each sub-task, not just after completing an ent
 - [x] 1.0 Install and configure shadcn/ui
 
 - [ ] 2.0 Create shared types and urgency utility
-  - [ ] 2.1 Create and checkout branch `feature/dashboard-types-urgency` from `feature/dashboard-ui`
-  - [ ] 2.2 Create `src/types/index.ts` with shared interfaces: `RfpStatus` enum/union, `Deadline`, `Rfp` (with nested deadlines and documents), `DeadlineWithRfp` (deadline flattened with RFP name/agency/status)
-  - [ ] 2.3 Write failing tests for `src/lib/urgency.ts` covering: overdue returns "overdue", date today or within 3 days returns "critical", 4–7 days returns "warning", >7 days returns "safe", completed deadline always returns "completed" regardless of date
-  - [ ] 2.4 Write failing tests for timezone correctness: urgency calculated using Europe/London timezone (a date that is "today" in London but "yesterday" in UTC during BST)
-  - [ ] 2.5 Write failing tests for `getUrgencyColor()` helper: returns correct Tailwind classes (dot colour and row background) for each urgency level
-  - [ ] 2.6 Implement `getUrgencyLevel(date: string, completed: boolean, now?: Date)` in `src/lib/urgency.ts` using `date-fns` and `date-fns-tz` with Europe/London timezone
-  - [ ] 2.7 Implement `getUrgencyColor(level: UrgencyLevel)` returning `{ dot: string, bg: string }` Tailwind class strings
-  - [ ] 2.8 Verify all urgency tests pass
-  - [ ] 2.9 Create `src/app/preview/page.tsx` — a temporary preview page that renders a sample list of urgency levels with their colour dots (all 5 levels: overdue, critical, warning, safe, completed) using hardcoded test dates so you can visually verify the colour scheme
-  - [ ] 2.10 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify all 5 urgency colour dots render correctly (red, red, amber, green, grey)
+  - [x] 2.1 Create and checkout branch `feature/dashboard-types-urgency` from `feature/dashboard-ui`
+  - [x] 2.2 Create `src/types/index.ts` with shared interfaces: `RfpStatus` enum/union, `Deadline`, `Rfp` (with nested deadlines and documents), `DeadlineWithRfp` (deadline flattened with RFP name/agency/status)
+  - [x] 2.3 Write failing tests for `src/lib/urgency.ts` covering: overdue returns "overdue", date today or within 3 days returns "critical", 4–7 days returns "warning", >7 days returns "safe", completed deadline always returns "completed" regardless of date
+  - [x] 2.4 Write failing tests for timezone correctness: urgency calculated using Europe/London timezone (a date that is "today" in London but "yesterday" in UTC during BST)
+  - [x] 2.5 Write failing tests for `getUrgencyColor()` helper: returns correct Tailwind classes (dot colour and row background) for each urgency level
+  - [x] 2.6 Implement `getUrgencyLevel(date: string, completed: boolean, now?: Date)` in `src/lib/urgency.ts` using `date-fns` and `date-fns-tz` with Europe/London timezone
+  - [x] 2.7 Implement `getUrgencyColor(level: UrgencyLevel)` returning `{ dot: string, bg: string }` Tailwind class strings
+  - [x] 2.8 Verify all urgency tests pass
+  - [x] 2.9 Create `src/app/preview/page.tsx` — a temporary preview page that renders a sample list of urgency levels with their colour dots (all 5 levels: overdue, critical, warning, safe, completed) using hardcoded test dates so you can visually verify the colour scheme
+  - [x] 2.10 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — verify all 5 urgency colour dots render correctly (red, red, amber, green, grey)
+
+- [x] 2.0 Create shared types and urgency utility
 
 - [ ] 3.0 Build Sidebar component
   - [ ] 3.1 Create and checkout branch `feature/dashboard-sidebar` from `feature/dashboard-ui`
