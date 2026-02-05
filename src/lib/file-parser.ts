@@ -3,8 +3,8 @@
  */
 
 import * as fs from 'fs/promises';
-import pdfParse = require('pdf-parse');
-import mammoth = require('mammoth');
+import pdfParse from 'pdf-parse';
+import * as mammoth from 'mammoth';
 import * as XLSX from 'xlsx';
 
 export interface ExtractionResult {

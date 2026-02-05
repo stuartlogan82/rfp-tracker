@@ -38,18 +38,20 @@ Update the file after completing each sub-task, not just after completing an ent
 
 ## Tasks
 
-- [ ] 0.0 Create feature branch
-  - [ ] 0.1 Create and checkout a new branch `feature/dashboard-ui` from `main`
+- [x] 0.0 Create feature branch
+  - [x] 0.1 Create and checkout a new branch `feature/dashboard-ui` from `main`
 
 - [ ] 1.0 Install and configure shadcn/ui
-  - [ ] 1.1 Create and checkout branch `feature/dashboard-shadcn-setup` from `feature/dashboard-ui`
-  - [ ] 1.2 Run `npx shadcn@latest init` to initialise shadcn/ui (select default style, CSS variables enabled)
-  - [ ] 1.3 Remove the dark mode `@media (prefers-color-scheme: dark)` block from `src/app/globals.css` (not needed)
-  - [ ] 1.4 Install required shadcn/ui components: `npx shadcn@latest add table badge card dialog button scroll-area separator`
-  - [ ] 1.5 Add `ResizeObserver` polyfill to `jest.setup.ts` for Radix UI compatibility in tests
-  - [ ] 1.6 Verify `npm run build` still passes with shadcn/ui installed
-  - [ ] 1.7 Verify all existing tests still pass (`npx jest`)
-  - [ ] 1.8 **Manual UI check:** Run `npm run dev`, open http://localhost:3000 — existing app still works. Check `src/components/ui/` directory contains the installed shadcn components
+  - [x] 1.1 Create and checkout branch `feature/dashboard-shadcn-setup` from `feature/dashboard-ui`
+  - [x] 1.2 Run `npx shadcn@latest init` to initialise shadcn/ui (select default style, CSS variables enabled)
+  - [x] 1.3 Remove the dark mode `@media (prefers-color-scheme: dark)` block from `src/app/globals.css` (not needed)
+  - [x] 1.4 Install required shadcn/ui components: `npx shadcn@latest add table badge card dialog button scroll-area separator`
+  - [x] 1.5 Add `ResizeObserver` polyfill to `jest.setup.ts` for Radix UI compatibility in tests
+  - [x] 1.6 Verify `npm run build` still passes with shadcn/ui installed
+  - [x] 1.7 Verify all existing tests still pass (`npx jest`)
+  - [x] 1.8 **Manual UI check:** Run `npm run dev`, open http://localhost:3000 — existing app still works. Check `src/components/ui/` directory contains the installed shadcn components
+
+- [x] 1.0 Install and configure shadcn/ui
 
 - [ ] 2.0 Create shared types and urgency utility
   - [ ] 2.1 Create and checkout branch `feature/dashboard-types-urgency` from `feature/dashboard-ui`

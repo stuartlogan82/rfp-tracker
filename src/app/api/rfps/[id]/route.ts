@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
+import { RfpStatus } from '@prisma/client';
 
 type RouteContext = {
   params: Promise<{ id: string }>;
@@ -83,7 +84,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
     const updateData: {
       name?: string;
       agency?: string;
-      status?: string;
+      status?: RfpStatus;
     } = {};
 
     if (name !== undefined) updateData.name = name;

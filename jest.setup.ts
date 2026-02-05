@@ -10,4 +10,11 @@ config();
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder as any;
 
+// Polyfill ResizeObserver for Radix UI components (used by shadcn/ui)
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 // Node 18+ has fetch built-in, no need to polyfill
