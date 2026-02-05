@@ -229,6 +229,38 @@ describe('openai', () => {
       expect(result[0].date).toBe('2024-03-15');
       expect(result[1].date).toBe('2024-03-20');
     });
+
+    it('handles text slightly larger than chunk size without infinite loop', async () => {
+      // Create text that's 50,500 characters (just over one chunk)
+      const largeText = 'x'.repeat(50500);
+
+      const mockResponse = {
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                dates: [
+                  {
+                    date: '2024-03-15',
+                    time: null,
+                    label: 'Deadline',
+                    context: 'RFP deadline'
+                  }
+                ]
+              })
+            }
+          }
+        ]
+      };
+
+      mockCreate.mockResolvedValue(mockResponse);
+
+      const result = await extractDates(largeText);
+
+      // Should have called OpenAI twice (2 chunks) without infinite loop
+      expect(mockCreate.mock.calls.length).toBe(2);
+      expect(result.length).toBe(1); // Same date in both chunks gets deduplicated
+    });
   });
 
   describe('extractDatesFromImage', () => {

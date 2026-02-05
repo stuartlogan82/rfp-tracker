@@ -104,14 +104,14 @@ export default function DateReview({ dates, rfpId, onSave, onCancel }: DateRevie
       <h3 className="text-lg font-semibold mb-4">Review Extracted Dates</h3>
 
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
+        <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="bg-gray-100">
-              <th className="p-2 text-left border">Date</th>
-              <th className="p-2 text-left border">Time</th>
-              <th className="p-2 text-left border">Label</th>
+              <th className="p-2 text-left border w-[140px]">Date</th>
+              <th className="p-2 text-left border w-[100px]">Time</th>
+              <th className="p-2 text-left border w-[200px]">Label</th>
               <th className="p-2 text-left border">Context</th>
-              <th className="p-2 text-left border">Actions</th>
+              <th className="p-2 text-left border w-[80px]">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -122,7 +122,7 @@ export default function DateReview({ dates, rfpId, onSave, onCancel }: DateRevie
                     type="date"
                     value={date.date}
                     onChange={(e) => handleFieldChange(date.id, 'date', e.target.value)}
-                    className="w-full p-1 border rounded"
+                    className="w-full p-1 border rounded text-sm"
                     placeholder="YYYY-MM-DD"
                   />
                 </td>
@@ -131,7 +131,7 @@ export default function DateReview({ dates, rfpId, onSave, onCancel }: DateRevie
                     type="time"
                     value={date.time || ''}
                     onChange={(e) => handleFieldChange(date.id, 'time', e.target.value || null)}
-                    className="w-full p-1 border rounded"
+                    className="w-full p-1 border rounded text-sm"
                   />
                 </td>
                 <td className="p-2 border">
@@ -139,21 +139,21 @@ export default function DateReview({ dates, rfpId, onSave, onCancel }: DateRevie
                     type="text"
                     value={date.label}
                     onChange={(e) => handleFieldChange(date.id, 'label', e.target.value)}
-                    className="w-full p-1 border rounded"
+                    className="w-full p-1 border rounded text-sm"
                   />
                 </td>
                 <td className="p-2 border">
-                  <input
-                    type="text"
+                  <textarea
                     value={date.context}
                     onChange={(e) => handleFieldChange(date.id, 'context', e.target.value)}
-                    className="w-full p-1 border rounded"
+                    className="w-full p-1 border rounded text-sm min-h-[60px] resize-y"
+                    rows={2}
                   />
                 </td>
-                <td className="p-2 border">
+                <td className="p-2 border text-center">
                   <button
                     onClick={() => handleDelete(date.id)}
-                    className="px-2 py-1 text-red-600 hover:bg-red-50 rounded"
+                    className="px-2 py-1 text-xs text-red-600 hover:bg-red-50 rounded"
                     aria-label="Delete date"
                   >
                     Delete

@@ -4,44 +4,75 @@ import React, { useState, useRef } from 'react';
 
 interface UploadZoneProps {
   rfpId: number;
-  onUploadComplete: (document: any) => void;
+  onUploadComplete?: (document: any) => void;
+  onExtractComplete?: (dates: any[]) => void;
 }
 
 type UploadState = 'idle' | 'uploading' | 'success' | 'error';
 
-export function UploadZone({ rfpId, onUploadComplete }: UploadZoneProps) {
+export function UploadZone({ rfpId, onUploadComplete, onExtractComplete }: UploadZoneProps) {
   const [uploadState, setUploadState] = useState<UploadState>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isDragging, setIsDragging] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = async (file: File) => {
     setUploadState('uploading');
     setErrorMessage('');
+    setStatusMessage('Uploading file...');
 
     try {
+      // Step 1: Upload file
       const formData = new FormData();
       formData.append('file', file);
       formData.append('rfpId', rfpId.toString());
 
-      const response = await fetch('/api/upload', {
+      const uploadResponse = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
       });
 
-      const data = await response.json();
+      const uploadData = await uploadResponse.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Upload failed');
+      if (!uploadResponse.ok) {
+        throw new Error(uploadData.error || 'Upload failed');
       }
 
-      setUploadState('success');
-      onUploadComplete(data.document);
+      // Call onUploadComplete if provided (for backwards compat)
+      if (onUploadComplete) {
+        onUploadComplete(uploadData.document);
+      }
 
-      // Reset to idle after 3 seconds
+      // Step 2: Extract dates if onExtractComplete is provided
+      if (onExtractComplete) {
+        setStatusMessage('Extracting dates...');
+
+        const extractResponse = await fetch('/api/extract', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ documentId: uploadData.document.id }),
+        });
+
+        const extractData = await extractResponse.json();
+
+        if (!extractResponse.ok) {
+          throw new Error(extractData.error || 'Extraction failed');
+        }
+
+        setUploadState('success');
+        setStatusMessage('Success!');
+        onExtractComplete(extractData.dates);
+      } else {
+        setUploadState('success');
+        setStatusMessage('Upload successful!');
+      }
+
+      // Reset to idle after 2 seconds
       setTimeout(() => {
         setUploadState('idle');
-      }, 3000);
+        setStatusMessage('');
+      }, 2000);
     } catch (error) {
       setUploadState('error');
       setErrorMessage(error instanceof Error ? error.message : 'Upload failed');
@@ -131,7 +162,7 @@ export function UploadZone({ rfpId, onUploadComplete }: UploadZoneProps) {
       {uploadState === 'uploading' && (
         <div className="flex flex-col items-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
-          <p className="text-gray-600">Uploading...</p>
+          <p className="text-gray-600">{statusMessage}</p>
         </div>
       )}
 
@@ -150,7 +181,7 @@ export function UploadZone({ rfpId, onUploadComplete }: UploadZoneProps) {
               d="M5 13l4 4L19 7"
             />
           </svg>
-          <p>Upload successful!</p>
+          <p>{statusMessage}</p>
         </div>
       )}
 

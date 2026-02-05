@@ -115,19 +115,19 @@ Update the file after completing each sub-task, not just after completing an ent
 
 - [x] 5.0 Build DeadlineTable component
 
-- [ ] 6.0 Build NewRfpDialog component
-  - [ ] 6.1 Create and checkout branch `feature/dashboard-new-rfp-dialog` from `feature/dashboard-ui`
-  - [ ] 6.2 Write failing tests for NewRfpDialog: renders dialog when `open` prop is true, does not render when false
-  - [ ] 6.3 Write failing tests for NewRfpDialog: Step 1 shows the RfpForm component; submitting the form advances to Step 2
-  - [ ] 6.4 Write failing tests for NewRfpDialog: Step 2 shows the UploadZone component; after upload + extraction completes, advances to Step 3
-  - [ ] 6.5 Write failing tests for NewRfpDialog: Step 3 shows the DateReview component; saving dates calls `onComplete` and closes the dialog
-  - [ ] 6.6 Write failing test for NewRfpDialog: cancelling at any step calls `onClose`
-  - [ ] 6.7 Implement `NewRfpDialog` component in `src/components/NewRfpDialog.tsx` with props: `open`, `onClose`, `onComplete`
-  - [ ] 6.8 Wire multi-step wizard state: `step` (1/2/3), `createdRfpId`, pass data between steps
-  - [ ] 6.9 Wrap content in shadcn `Dialog` component with appropriate title per step
-  - [ ] 6.10 Verify all NewRfpDialog tests pass
-  - [ ] 6.11 Update `src/app/preview/page.tsx` to add an "Open New RFP Dialog" button that opens the NewRfpDialog. Wire `onComplete` and `onClose` to `console.log`
-  - [ ] 6.12 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — click "Open New RFP Dialog", verify 3-step wizard works: Step 1 shows RFP form, Step 2 shows upload zone, Step 3 shows date review. Verify cancel closes the dialog
+- [x] 6.0 Build NewRfpDialog component
+  - [x] 6.1 Create and checkout branch `feature/dashboard-new-rfp-dialog` from `feature/dashboard-ui`
+  - [x] 6.2 Write failing tests for NewRfpDialog: renders dialog when `open` prop is true, does not render when false
+  - [x] 6.3 Write failing tests for NewRfpDialog: Step 1 shows the RfpForm component; submitting the form advances to Step 2
+  - [x] 6.4 Write failing tests for NewRfpDialog: Step 2 shows the UploadZone component; after upload + extraction completes, advances to Step 3
+  - [x] 6.5 Write failing tests for NewRfpDialog: Step 3 shows the DateReview component; saving dates calls `onComplete` and closes the dialog
+  - [x] 6.6 Write failing test for NewRfpDialog: cancelling at any step calls `onClose`
+  - [x] 6.7 Implement `NewRfpDialog` component in `src/components/NewRfpDialog.tsx` with props: `open`, `onClose`, `onComplete`
+  - [x] 6.8 Wire multi-step wizard state: `step` (1/2/3), `createdRfpId`, pass data between steps
+  - [x] 6.9 Wrap content in shadcn `Dialog` component with appropriate title per step
+  - [x] 6.10 Verify all NewRfpDialog tests pass
+  - [x] 6.11 Update `src/app/preview/page.tsx` to add an "Open New RFP Dialog" button that opens the NewRfpDialog. Wire `onComplete` and `onClose` to `console.log`
+  - [x] 6.12 **Manual UI check:** Run `npm run dev`, open http://localhost:3000/preview — click "Open New RFP Dialog", verify 3-step wizard works: Step 1 shows RFP form, Step 2 shows upload zone, Step 3 shows date review. Verify cancel closes the dialog
 
 - [ ] 7.0 Build Dashboard orchestrator and integrate into page
   - [ ] 7.1 Create and checkout branch `feature/dashboard-orchestrator` from `feature/dashboard-ui`

@@ -1,10 +1,20 @@
 import OpenAI from 'openai';
 import { readFileSync } from 'fs';
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Lazy-initialize OpenAI client to ensure API key is available
+let openaiClient: OpenAI | null = null;
+
+function getOpenAIClient(): OpenAI {
+  if (!openaiClient) {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY environment variable is not set');
+    }
+    openaiClient = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return openaiClient;
+}
 
 export interface ExtractedDate {
   date: string; // YYYY-MM-DD
@@ -51,7 +61,8 @@ function chunkText(text: string): string[] {
   while (start < text.length) {
     const end = Math.min(start + MAX_CHARS_PER_CHUNK, text.length);
     chunks.push(text.substring(start, end));
-    start = end - CHUNK_OVERLAP;
+    // Move forward by chunk size minus overlap to ensure progress
+    start += MAX_CHARS_PER_CHUNK - CHUNK_OVERLAP;
   }
 
   return chunks;
@@ -77,6 +88,7 @@ function deduplicateDates(dates: ExtractedDate[]): ExtractedDate[] {
  * Extract dates from a single text chunk
  */
 async function extractDatesFromChunk(text: string): Promise<ExtractedDate[]> {
+  const openai = getOpenAIClient();
   const response = await openai.chat.completions.create({
     model: 'gpt-4o',
     messages: [
@@ -146,6 +158,7 @@ export async function extractDatesFromImage(filepath: string): Promise<Extracted
     };
     const mimeType = mimeTypes[ext || ''] || 'image/png';
 
+    const openai = getOpenAIClient();
     const response = await openai.chat.completions.create({
       model: 'gpt-4o',
       messages: [

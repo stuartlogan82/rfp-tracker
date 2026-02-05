@@ -5,13 +5,18 @@
 
 'use client';
 
+import { useState } from 'react';
 import { getUrgencyLevel, getUrgencyColor } from '@/lib/urgency';
 import Sidebar from '@/components/Sidebar';
 import SummaryCards from '@/components/SummaryCards';
 import DeadlineTable from '@/components/DeadlineTable';
+import NewRfpDialog from '@/components/NewRfpDialog';
+import { Button } from '@/components/ui/button';
 import type { RfpWithRelations, DeadlineWithRfp } from '@/types';
 
 export default function PreviewPage() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   // Sample RFPs for Sidebar
   const sampleRfps: RfpWithRelations[] = [
     {
@@ -185,7 +190,12 @@ export default function PreviewPage() {
       {/* Main content */}
       <div className="flex-1 p-8">
         <div className="max-w-6xl">
-          <h1 className="text-3xl font-bold mb-8">Component Preview</h1>
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="text-3xl font-bold">Component Preview</h1>
+            <Button onClick={() => setDialogOpen(true)}>
+              Open New RFP Dialog
+            </Button>
+          </div>
 
           {/* Summary Cards */}
           <div className="mb-8">
@@ -265,6 +275,16 @@ export default function PreviewPage() {
             </ul>
           </div>
         </div>
+
+        {/* New RFP Dialog */}
+        <NewRfpDialog
+          open={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          onComplete={() => {
+            setDialogOpen(false);
+            console.log('RFP creation completed!');
+          }}
+        />
       </div>
       </div>
     </div>

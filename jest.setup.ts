@@ -6,6 +6,11 @@ import { TextEncoder, TextDecoder } from 'util';
 
 config();
 
+// Set a dummy OpenAI API key for tests (the actual client will be mocked)
+if (!process.env.OPENAI_API_KEY) {
+  process.env.OPENAI_API_KEY = 'test-api-key-for-mocking';
+}
+
 // Polyfill TextEncoder/TextDecoder for jsdom
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder as any;
