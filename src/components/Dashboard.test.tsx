@@ -470,6 +470,62 @@ describe('Dashboard', () => {
         expect(screen.getByText(/update failed/i)).toBeInTheDocument();
       });
     });
+
+    it('refreshes data when deadline is not found (404)', async () => {
+      // Initial data has deadline with ID 1
+      const initialRfps = [mockRfps[0]];
+      // After refresh, deadline has been removed
+      const refreshedRfps = [
+        {
+          ...mockRfps[0],
+          deadlines: [], // Deadline was deleted
+        },
+      ];
+
+      (global.fetch as jest.Mock)
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ rfps: initialRfps }),
+        })
+        .mockResolvedValueOnce({
+          ok: false,
+          json: async () => ({ error: 'Deadline not found' }),
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ rfps: refreshedRfps }),
+        });
+
+      render(<Dashboard />);
+      const user = userEvent.setup();
+
+      await waitFor(() => {
+        expect(screen.getByTestId('deadline-table')).toBeInTheDocument();
+      });
+
+      // Verify deadline is visible initially
+      expect(screen.getByTestId('deadline-1')).toBeInTheDocument();
+
+      // Toggle deadline completion (this will fail with 404)
+      const checkbox = screen.getByTestId('toggle-1');
+      await user.click(checkbox);
+
+      // Should display error message
+      await waitFor(() => {
+        expect(screen.getByText(/deadline not found/i)).toBeInTheDocument();
+      });
+
+      // Should automatically refresh data after 404 error
+      await waitFor(() => {
+        expect(global.fetch).toHaveBeenCalledTimes(3);
+        expect(global.fetch).toHaveBeenNthCalledWith(3, '/api/rfps');
+      });
+
+      // Deadline should be removed from UI after refresh
+      await waitFor(() => {
+        expect(screen.queryByTestId('deadline-1')).not.toBeInTheDocument();
+      });
+    });
   });
 
   describe('RFP deletion', () => {

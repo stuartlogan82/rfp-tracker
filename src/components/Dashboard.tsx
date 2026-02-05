@@ -133,6 +133,9 @@ export default function Dashboard() {
       await refreshData();
     } catch (err) {
       setUpdateError(err instanceof Error ? err.message : 'Update failed');
+      // Refresh data even on error to sync UI with database state
+      // This handles cases where the deadline was deleted elsewhere
+      await refreshData();
     }
   };
 
