@@ -95,7 +95,7 @@ main
   - [x] 2.13 **Implement:** Create `src/app/api/auth/google/status/route.ts` with a GET handler. Query for a `GoogleAuth` record — return `{ connected: true }` if found, `{ connected: false }` otherwise.
   - [x] 2.14 **Verify GREEN:** Run `npx jest src/app/api/auth/google/status/route.test.ts` — all tests must pass.
   - [x] 2.15 **Full regression:** Run `npx jest` to confirm no regressions.
-  - [ ] 2.16 **Commit:** Stage and commit all changes with a descriptive message.
+  - [x] 2.16 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 2.17 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 3.0 Google Calendar API service layer
