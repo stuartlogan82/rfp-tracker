@@ -66,7 +66,7 @@ main
 
 ## Tasks
 
-- [ ] 1.0 Database schema changes & dependency installation
+- [x] 1.0 Database schema changes & dependency installation
   - [x] 1.1 Create and checkout branch: `git checkout -b feature/google-cal-schema`
   - [x] 1.2 Install the `googleapis` npm package: `npm install googleapis`
   - [x] 1.3 Add `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and `GOOGLE_REDIRECT_URI` placeholder entries to `.env.local` (and document them in CLAUDE.md tech stack section).
@@ -77,24 +77,24 @@ main
   - [x] 1.8 **Write test:** In `src/lib/db.test.ts`, add a test that creates a `GoogleAuth` record and verifies it can be read back. Add a test that creates a `Deadline` with a `googleEventId` and verifies it persists. Run to confirm GREEN.
   - [x] 1.9 **Full regression:** Run `npx jest` to confirm all existing tests still pass with the schema changes.
   - [x] 1.10 **Commit:** Stage and commit all changes with a descriptive message.
-  - [ ] 1.11 **CHECKPOINT — Wait for user to test and approve before merging to main.**
+  - [x] 1.11 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 2.0 Google OAuth authentication flow
-  - [ ] 2.1 Merge `feature/google-cal-schema` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/google-oauth`
-  - [ ] 2.2 **Write failing test:** Create `src/app/api/auth/google/route.test.ts` with `@jest-environment node` docblock. Mock the `googleapis` module. Write a test that calls `GET /api/auth/google` and asserts the response is a redirect (302) to a URL containing `accounts.google.com`. Run to confirm RED.
-  - [ ] 2.3 **Write failing test:** Add a test that calls `DELETE /api/auth/google` when a `GoogleAuth` record exists — assert it returns 200 and the record is deleted from the database. Run to confirm RED.
-  - [ ] 2.4 **Write failing test:** Add a test that calls `DELETE /api/auth/google` when no `GoogleAuth` record exists — assert it returns 404. Run to confirm RED.
-  - [ ] 2.5 **Implement:** Create `src/app/api/auth/google/route.ts` with GET and DELETE handlers. GET constructs a Google OAuth2 client using the env vars, generates an auth URL with `calendar.events` scope and `access_type: 'offline'`, and returns a redirect. DELETE finds the `GoogleAuth` record, revokes the token via the Google API (best-effort), and deletes the record from the database.
-  - [ ] 2.6 **Verify GREEN:** Run `npx jest src/app/api/auth/google/route.test.ts` — all tests must pass.
-  - [ ] 2.7 **Write failing test:** Create `src/app/api/auth/google/callback/route.test.ts` with `@jest-environment node` docblock. Mock the `googleapis` module. Write a test that calls `GET /api/auth/google/callback?code=mock_code` and asserts: it exchanges the code for tokens, stores a `GoogleAuth` record in the database, and redirects to `/` (the dashboard). Run to confirm RED.
-  - [ ] 2.8 **Write failing test:** Add a test for the callback when the `code` parameter is missing — assert it returns 400. Run to confirm RED.
-  - [ ] 2.9 **Write failing test:** Add a test for the callback when a `GoogleAuth` record already exists — assert it updates the existing record rather than creating a duplicate. Run to confirm RED.
-  - [ ] 2.10 **Implement:** Create `src/app/api/auth/google/callback/route.ts` with a GET handler. Extract `code` from search params (return 400 if missing). Use the Google OAuth2 client to exchange the code for tokens. Upsert the `GoogleAuth` record (create if none exists, update if one does). Redirect to `/`.
-  - [ ] 2.11 **Verify GREEN:** Run `npx jest src/app/api/auth/google/callback/route.test.ts` — all tests must pass.
-  - [ ] 2.12 **Write failing test:** Create `src/app/api/auth/google/status/route.test.ts` with `@jest-environment node` docblock. Write a test that returns `{ connected: true }` when a `GoogleAuth` record exists, and `{ connected: false }` when it doesn't. Run to confirm RED.
-  - [ ] 2.13 **Implement:** Create `src/app/api/auth/google/status/route.ts` with a GET handler. Query for a `GoogleAuth` record — return `{ connected: true }` if found, `{ connected: false }` otherwise.
-  - [ ] 2.14 **Verify GREEN:** Run `npx jest src/app/api/auth/google/status/route.test.ts` — all tests must pass.
-  - [ ] 2.15 **Full regression:** Run `npx jest` to confirm no regressions.
+  - [x] 2.1 Merge `feature/google-cal-schema` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/google-oauth`
+  - [x] 2.2 **Write failing test:** Create `src/app/api/auth/google/route.test.ts` with `@jest-environment node` docblock. Mock the `googleapis` module. Write a test that calls `GET /api/auth/google` and asserts the response is a redirect (302) to a URL containing `accounts.google.com`. Run to confirm RED.
+  - [x] 2.3 **Write failing test:** Add a test that calls `DELETE /api/auth/google` when a `GoogleAuth` record exists — assert it returns 200 and the record is deleted from the database. Run to confirm RED.
+  - [x] 2.4 **Write failing test:** Add a test that calls `DELETE /api/auth/google` when no `GoogleAuth` record exists — assert it returns 404. Run to confirm RED.
+  - [x] 2.5 **Implement:** Create `src/app/api/auth/google/route.ts` with GET and DELETE handlers. GET constructs a Google OAuth2 client using the env vars, generates an auth URL with `calendar.events` scope and `access_type: 'offline'`, and returns a redirect. DELETE finds the `GoogleAuth` record, revokes the token via the Google API (best-effort), and deletes the record from the database.
+  - [x] 2.6 **Verify GREEN:** Run `npx jest src/app/api/auth/google/route.test.ts` — all tests must pass.
+  - [x] 2.7 **Write failing test:** Create `src/app/api/auth/google/callback/route.test.ts` with `@jest-environment node` docblock. Mock the `googleapis` module. Write a test that calls `GET /api/auth/google/callback?code=mock_code` and asserts: it exchanges the code for tokens, stores a `GoogleAuth` record in the database, and redirects to `/` (the dashboard). Run to confirm RED.
+  - [x] 2.8 **Write failing test:** Add a test for the callback when the `code` parameter is missing — assert it returns 400. Run to confirm RED.
+  - [x] 2.9 **Write failing test:** Add a test for the callback when a `GoogleAuth` record already exists — assert it updates the existing record rather than creating a duplicate. Run to confirm RED.
+  - [x] 2.10 **Implement:** Create `src/app/api/auth/google/callback/route.ts` with a GET handler. Extract `code` from search params (return 400 if missing). Use the Google OAuth2 client to exchange the code for tokens. Upsert the `GoogleAuth` record (create if none exists, update if one does). Redirect to `/`.
+  - [x] 2.11 **Verify GREEN:** Run `npx jest src/app/api/auth/google/callback/route.test.ts` — all tests must pass.
+  - [x] 2.12 **Write failing test:** Create `src/app/api/auth/google/status/route.test.ts` with `@jest-environment node` docblock. Write a test that returns `{ connected: true }` when a `GoogleAuth` record exists, and `{ connected: false }` when it doesn't. Run to confirm RED.
+  - [x] 2.13 **Implement:** Create `src/app/api/auth/google/status/route.ts` with a GET handler. Query for a `GoogleAuth` record — return `{ connected: true }` if found, `{ connected: false }` otherwise.
+  - [x] 2.14 **Verify GREEN:** Run `npx jest src/app/api/auth/google/status/route.test.ts` — all tests must pass.
+  - [x] 2.15 **Full regression:** Run `npx jest` to confirm no regressions.
   - [ ] 2.16 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 2.17 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
