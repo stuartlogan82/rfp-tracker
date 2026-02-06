@@ -136,5 +136,5 @@ main
   - [x] 5.6 Manually verify: click "Export" on a single deadline row, confirm a `.ics` file downloads with the correct filename and can be opened by a calendar application.
   - [x] 5.7 Manually verify: click "Export All" in the dashboard header, confirm a bulk `.ics` file downloads containing multiple events.
   - [x] 5.8 Update the parent task list `tasks/tasks-rfp-tracker.md` — check off task 7.0 and all its sub-tasks (7.1 through 7.6).
-  - [ ] 5.9 **Commit** any polish changes with a descriptive message.
-  - [ ] 5.10 **CHECKPOINT — Wait for user to test and approve before merging to main.**
+  - [x] 5.9 **Commit** any polish changes with a descriptive message.
+  - [x] 5.10 **CHECKPOINT — Wait for user to test and approve before merging to main.**
