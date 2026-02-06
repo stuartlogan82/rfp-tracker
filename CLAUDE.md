@@ -99,8 +99,9 @@ This project follows strict TDD. The cycle for every piece of functionality is:
 ### Test Environment Setup
 
 - Jest is configured to set `NODE_ENV=test` which triggers dotenv loading in `src/lib/db.ts`
-- Database cleanup happens in `beforeEach` hooks using the real Prisma client
-- The test database is the same as dev (`dev.db`) - acceptable for single-user local app
+- **CRITICAL: Tests use a separate `test.db` database — NEVER `dev.db`**. The `db.ts` file forces `file:./test.db` when `NODE_ENV=test`, ignoring `DATABASE_URL` from `.env`. This prevents `deleteMany()` calls in `beforeEach` hooks from destroying real user data.
+- Database cleanup happens in `beforeEach` hooks using the real Prisma client (against `test.db` only)
+- If the schema changes, run `DATABASE_URL="file:./test.db" npx prisma db push` to sync the test database
 
 ### Running Tests
 

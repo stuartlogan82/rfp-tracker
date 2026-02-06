@@ -10,7 +10,11 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-const databaseUrl = process.env.DATABASE_URL || (process.env.NODE_ENV === 'test' ? 'file:./test.db' : 'file:./dev.db');
+// CRITICAL: Tests MUST always use test.db to avoid destroying real data.
+// DATABASE_URL from .env points to dev.db, so we override it in test mode.
+const databaseUrl = process.env.NODE_ENV === 'test'
+  ? 'file:./test.db'
+  : (process.env.DATABASE_URL || 'file:./dev.db');
 
 const adapter = new PrismaBetterSqlite3({
   url: databaseUrl,
