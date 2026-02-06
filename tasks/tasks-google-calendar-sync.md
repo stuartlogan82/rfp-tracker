@@ -79,7 +79,7 @@ main
   - [x] 1.10 **Commit:** Stage and commit all changes with a descriptive message.
   - [x] 1.11 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
-- [ ] 2.0 Google OAuth authentication flow
+- [x] 2.0 Google OAuth authentication flow
   - [x] 2.1 Merge `feature/google-cal-schema` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/google-oauth`
   - [x] 2.2 **Write failing test:** Create `src/app/api/auth/google/route.test.ts` with `@jest-environment node` docblock. Mock the `googleapis` module. Write a test that calls `GET /api/auth/google` and asserts the response is a redirect (302) to a URL containing `accounts.google.com`. Run to confirm RED.
   - [x] 2.3 **Write failing test:** Add a test that calls `DELETE /api/auth/google` when a `GoogleAuth` record exists — assert it returns 200 and the record is deleted from the database. Run to confirm RED.
@@ -96,25 +96,25 @@ main
   - [x] 2.14 **Verify GREEN:** Run `npx jest src/app/api/auth/google/status/route.test.ts` — all tests must pass.
   - [x] 2.15 **Full regression:** Run `npx jest` to confirm no regressions.
   - [x] 2.16 **Commit:** Stage and commit all changes with a descriptive message.
-  - [ ] 2.17 **CHECKPOINT — Wait for user to test and approve before merging to main.**
+  - [x] 2.17 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 3.0 Google Calendar API service layer
-  - [ ] 3.1 Merge `feature/google-oauth` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/google-cal-service`
-  - [ ] 3.2 **Write failing test:** Create `src/lib/google-calendar.test.ts`. Mock the `googleapis` module. Write a test for `getAuthenticatedClient()` that: when a valid `GoogleAuth` record exists in the database, returns an authenticated OAuth2 client. When no record exists, returns `null`. Run to confirm RED.
-  - [ ] 3.3 **Write failing test:** Add a test for `getAuthenticatedClient()` that: when the stored `expiresAt` is in the past, uses the refresh token to obtain a new access token and updates the database record. Run to confirm RED.
-  - [ ] 3.4 **Write failing test:** Add a test for `createCalendarEvent(deadline)` that: calls the Google Calendar API `events.insert` with the correct parameters (summary, start, end, description, reminders) and returns the created event's `id`. Run to confirm RED.
-  - [ ] 3.5 **Write failing test:** Add a test for `createCalendarEvent()` with a timed deadline (has `time` field) — verify the event start/end use `dateTime` format with `Europe/London` timezone. Add a test with an all-day deadline (time is null) — verify the event start/end use `date` format. Run to confirm RED.
-  - [ ] 3.6 **Write failing test:** Add a test for `updateCalendarEvent(googleEventId, deadline)` that calls `events.update` with the correct event ID and updated data, and returns successfully. Run to confirm RED.
-  - [ ] 3.7 **Write failing test:** Add a test for `deleteCalendarEvent(googleEventId)` that calls `events.delete` with the correct event ID and returns successfully. Run to confirm RED.
-  - [ ] 3.8 **Write failing test:** Add a test that verifies `createCalendarEvent` gracefully handles API errors (throws or returns null with a meaningful message). Run to confirm RED.
-  - [ ] 3.9 **Implement:** Create `src/lib/google-calendar.ts`. Export the following functions:
+  - [x] 3.1 Merge `feature/google-oauth` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/google-cal-service`
+  - [x] 3.2 **Write failing test:** Create `src/lib/google-calendar.test.ts`. Mock the `googleapis` module. Write a test for `getAuthenticatedClient()` that: when a valid `GoogleAuth` record exists in the database, returns an authenticated OAuth2 client. When no record exists, returns `null`. Run to confirm RED.
+  - [x] 3.3 **Write failing test:** Add a test for `getAuthenticatedClient()` that: when the stored `expiresAt` is in the past, uses the refresh token to obtain a new access token and updates the database record. Run to confirm RED.
+  - [x] 3.4 **Write failing test:** Add a test for `createCalendarEvent(deadline)` that: calls the Google Calendar API `events.insert` with the correct parameters (summary, start, end, description, reminders) and returns the created event's `id`. Run to confirm RED.
+  - [x] 3.5 **Write failing test:** Add a test for `createCalendarEvent()` with a timed deadline (has `time` field) — verify the event start/end use `dateTime` format with `Europe/London` timezone. Add a test with an all-day deadline (time is null) — verify the event start/end use `date` format. Run to confirm RED.
+  - [x] 3.6 **Write failing test:** Add a test for `updateCalendarEvent(googleEventId, deadline)` that calls `events.update` with the correct event ID and updated data, and returns successfully. Run to confirm RED.
+  - [x] 3.7 **Write failing test:** Add a test for `deleteCalendarEvent(googleEventId)` that calls `events.delete` with the correct event ID and returns successfully. Run to confirm RED.
+  - [x] 3.8 **Write failing test:** Add a test that verifies `createCalendarEvent` gracefully handles API errors (throws or returns null with a meaningful message). Run to confirm RED.
+  - [x] 3.9 **Implement:** Create `src/lib/google-calendar.ts`. Export the following functions:
     - `getAuthenticatedClient()`: Fetches the `GoogleAuth` record from the database. If none exists, returns `null`. If the token is expired (`expiresAt < now`), uses the refresh token to get a new access token, updates the database, and returns the client. Otherwise returns the client with the current access token.
     - `createCalendarEvent(deadline: { date: Date | string, time: string | null, label: string, context: string | null, rfpName: string })`: Uses the authenticated client to call `calendar.events.insert` on the primary calendar. Formats timed events with `dateTime` and timezone `Europe/London`, all-day events with `date` only. Includes a 24-hour popup reminder. Returns the event ID string.
     - `updateCalendarEvent(googleEventId: string, deadline: same shape)`: Calls `calendar.events.update` with the existing event ID.
     - `deleteCalendarEvent(googleEventId: string)`: Calls `calendar.events.delete`.
     - All functions should handle errors gracefully (try/catch, log errors, throw or return null).
-  - [ ] 3.10 **Verify GREEN:** Run `npx jest src/lib/google-calendar.test.ts` — all tests must pass.
-  - [ ] 3.11 **Full regression:** Run `npx jest` to confirm no regressions.
+  - [x] 3.10 **Verify GREEN:** Run `npx jest src/lib/google-calendar.test.ts` — all tests must pass.
+  - [x] 3.11 **Full regression:** Run `npx jest` to confirm no regressions.
   - [ ] 3.12 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 3.13 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
