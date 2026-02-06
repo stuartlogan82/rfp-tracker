@@ -185,6 +185,11 @@ export default function CalendarView({
           headerComponent={<CalendarHeader />}
           onEventClick={handleEventClick}
           disableDragAndDrop={true}
+          renderEvent={(event) => (
+            <div className="px-1.5 py-0.5 text-xs rounded truncate overflow-hidden w-full">
+              <span className="font-medium truncate block">{event.title}</span>
+            </div>
+          )}
         />
       </div>
 
