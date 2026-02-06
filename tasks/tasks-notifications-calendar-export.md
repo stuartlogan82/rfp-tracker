@@ -70,7 +70,7 @@ main
   - [x] 1.10 **Add edge case test:** Write a test for a deadline with an empty/null context — verify the output does NOT contain a `DESCRIPTION` field. Run to confirm GREEN.
   - [x] 1.11 **Add edge case test:** Write a test for `generateIcsForDeadlines` with an empty array — verify it throws an error or returns an empty string gracefully. Run to confirm GREEN.
   - [x] 1.12 **Full regression:** Run `npx jest` to confirm all existing tests still pass.
-  - [ ] 1.13 **Commit:** Stage and commit all changes with a descriptive message.
+  - [x] 1.13 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 1.14 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 2.0 Build calendar export API route (`src/app/api/export/route.ts`)
