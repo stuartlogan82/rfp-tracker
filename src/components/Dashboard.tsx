@@ -11,6 +11,7 @@ import type { RfpWithRelations, DeadlineWithRfp } from '@/types';
 import Sidebar from './Sidebar';
 import SummaryCards from './SummaryCards';
 import DeadlineTable from './DeadlineTable';
+import CalendarView from './CalendarView';
 import RfpDetail from './RfpDetail';
 import NewRfpDialog from './NewRfpDialog';
 import NotificationBanner from './NotificationBanner';
@@ -269,7 +270,12 @@ export default function Dashboard() {
                 />
               ) : (
                 <div data-testid="calendar-view">
-                  Calendar view placeholder
+                  <CalendarView
+                    deadlines={filteredDeadlines}
+                    onSelectRfp={handleSelectRfp}
+                    onToggleComplete={handleToggleComplete}
+                    onDeadlineUpdate={refreshData}
+                  />
                 </div>
               )}
             </>
