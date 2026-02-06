@@ -113,7 +113,7 @@ main
   - [x] 3.12 **Commit:** Stage and commit all changes with a descriptive message.
   - [x] 3.13 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
-- [ ] 4.0 Add export buttons to Dashboard and DeadlineTable
+- [x] 4.0 Add export buttons to Dashboard and DeadlineTable
   - [x] 4.1 Merge `feature/notification-banner` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/export-buttons`
   - [x] 4.2 **Write failing test:** In `src/components/DeadlineTable.test.tsx`, add a test that verifies each deadline row contains an export link/button with an `href` attribute pointing to `/api/export?deadlineId=<id>`. Run to confirm RED.
   - [x] 4.3 **Modify DeadlineTable:** Add an "Actions" column header to the table. In each row, add an anchor element (`<a>`) styled as a small button/link with `href={/api/export?deadlineId=${deadline.id}}`, `download` attribute, and accessible text (e.g., `aria-label="Export to calendar"`). Use a calendar icon or the text "Export". Keep the styling subtle (e.g., `text-blue-600 hover:text-blue-800 text-sm`).
@@ -124,7 +124,7 @@ main
   - [x] 4.8 **Modify Dashboard:** Import `NotificationBanner` and render it between the update-error banner (line 212-216) and the SummaryCards section (line 221), passing `filteredDeadlines` as the `deadlines` prop. Add an "Export All" button (as an `<a>` element styled with the existing `Button` component) in the header row next to the "Show all RFPs" toggle, with `href="/api/export"` and `download="rfp-deadlines.ics"`.
   - [x] 4.9 **Verify GREEN:** Run `npx jest src/components/Dashboard.test.tsx` — all tests (old + new) must pass.
   - [x] 4.10 **Full regression:** Run `npx jest` to confirm zero regressions across all test files.
-  - [ ] 4.11 **Commit:** Stage and commit all changes with a descriptive message.
+  - [x] 4.11 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 4.12 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 5.0 Integration verification & final polish
