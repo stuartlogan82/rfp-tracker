@@ -270,4 +270,23 @@ describe('DeadlineTable', () => {
     // Overdue should have red background (bg-red-50)
     expect(rows[0].className).toMatch(/bg-red-50/);
   });
+
+  it('renders export link for each deadline row', () => {
+    render(
+      <DeadlineTable
+        deadlines={mockDeadlines}
+        onSelectRfp={jest.fn()}
+        onToggleComplete={jest.fn()}
+        now={now}
+      />
+    );
+
+    // Each deadline should have an export link
+    const exportLinks = screen.getAllByRole('link', { name: /export/i });
+    expect(exportLinks).toHaveLength(mockDeadlines.length);
+
+    // Verify export links contain deadlineId params
+    expect(exportLinks[0]).toHaveAttribute('href', expect.stringContaining('/api/export?deadlineId='));
+    expect(exportLinks[0]).toHaveAttribute('download');
+  });
 });

@@ -536,4 +536,69 @@ describe('Dashboard', () => {
       expect(fetchCalls.some((call: any) => call[0] === '/api/rfps/1' && call[1]?.method === 'DELETE')).toBe(true);
     });
   });
+
+  describe('NotificationBanner integration', () => {
+    it('renders NotificationBanner when urgent deadlines exist', async () => {
+      // Create RFP with critical deadline (within 3 days)
+      const urgentDate = new Date();
+      urgentDate.setDate(urgentDate.getDate() + 2); // 2 days from now
+
+      const mockRfpsWithUrgent = [
+        {
+          id: 1,
+          name: 'Urgent RFP',
+          agency: 'Test Agency',
+          status: 'Active' as const,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          deadlines: [
+            {
+              id: 1,
+              rfpId: 1,
+              date: urgentDate.toISOString(),
+              time: null,
+              label: 'Critical Deadline',
+              context: null,
+              completed: false,
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+            },
+          ],
+          documents: [],
+        },
+      ];
+
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ rfps: mockRfpsWithUrgent }),
+      });
+
+      render(<Dashboard />);
+
+      await waitFor(() => {
+        expect(screen.getByRole('alert')).toBeInTheDocument();
+        expect(screen.getByText(/1 deadline is due/i)).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('Export All button', () => {
+    it('renders Export All button in dashboard header', async () => {
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ rfps: mockRfps }),
+      });
+
+      render(<Dashboard />);
+
+      await waitFor(() => {
+        expect(screen.getByTestId('deadline-table')).toBeInTheDocument();
+      });
+
+      const exportAllLink = screen.getByRole('link', { name: /export all/i });
+      expect(exportAllLink).toBeInTheDocument();
+      expect(exportAllLink).toHaveAttribute('href', '/api/export');
+      expect(exportAllLink).toHaveAttribute('download');
+    });
+  });
 });

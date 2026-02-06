@@ -13,6 +13,7 @@ import SummaryCards from './SummaryCards';
 import DeadlineTable from './DeadlineTable';
 import RfpDetail from './RfpDetail';
 import NewRfpDialog from './NewRfpDialog';
+import NotificationBanner from './NotificationBanner';
 
 export default function Dashboard() {
   // State management
@@ -195,16 +196,40 @@ export default function Dashboard() {
             <div className="mb-6 flex justify-between items-center">
               <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
 
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={showAll}
-                  onChange={(e) => setShowAll(e.target.checked)}
-                  data-testid="show-all-toggle"
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">Show all RFPs</span>
-              </label>
+              <div className="flex items-center gap-4">
+                <a
+                  href="/api/export"
+                  download="rfp-deadlines.ics"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+                  aria-label="Export all deadlines to calendar"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Export All
+                </a>
+
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={showAll}
+                    onChange={(e) => setShowAll(e.target.checked)}
+                    data-testid="show-all-toggle"
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-sm text-gray-700">Show all RFPs</span>
+                </label>
+              </div>
             </div>
           )}
 
@@ -218,6 +243,9 @@ export default function Dashboard() {
           {/* Dashboard view - Summary cards and deadline table */}
           {!selectedRfp && (
             <>
+              {/* Notification Banner for urgent deadlines */}
+              <NotificationBanner deadlines={filteredDeadlines} />
+
               <div className="mb-6">
                 <SummaryCards
                   deadlines={filteredDeadlines}
