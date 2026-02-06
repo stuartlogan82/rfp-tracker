@@ -50,14 +50,14 @@ main
 ## Tasks
 
 - [ ] 1.0 Build ICS generator utility (`src/lib/ics-generator.ts`)
-  - [ ] 1.1 Create and checkout branch: `git checkout -b feature/ics-generator`
-  - [ ] 1.2 **Write failing test:** Create `src/lib/ics-generator.test.ts`. Write a test that imports `generateIcsForDeadline` and verifies it returns a string containing `BEGIN:VCALENDAR` and `END:VCALENDAR` for a single deadline with a specific time (e.g., date `2026-03-15`, time `"14:00"`, label `"Proposal Due"`, rfpName `"NHS RFP"`). Run `npx jest src/lib/ics-generator.test.ts` to confirm it fails (RED).
-  - [ ] 1.3 **Write failing test:** Add a test that verifies the returned `.ics` string contains a `SUMMARY` field with both the label and RFP name (e.g., `SUMMARY:Proposal Due - NHS RFP`). Run to confirm RED.
-  - [ ] 1.4 **Write failing test:** Add a test that verifies a deadline **without** a time produces an all-day event (the start DateArray has only 3 elements `[year, month, day]`, which the `ics` package renders as an all-day event — look for `VALUE=DATE` or verify no `T` timestamp in `DTSTART`). Run to confirm RED.
-  - [ ] 1.5 **Write failing test:** Add a test that verifies each event includes a `VALARM` with `TRIGGER:-P1D` (24-hour reminder). Run to confirm RED.
-  - [ ] 1.6 **Write failing test:** Add a test that verifies a deadline with a non-null `context` field includes that context as the `DESCRIPTION` in the `.ics` output. Run to confirm RED.
-  - [ ] 1.7 **Write failing test:** Add a test for `generateIcsForDeadlines` (plural) that accepts an array of deadlines and returns a single `.ics` string containing multiple `VEVENT` blocks. Verify the returned string contains `BEGIN:VEVENT` appearing once per deadline. Run to confirm RED.
-  - [ ] 1.8 **Implement:** Create `src/lib/ics-generator.ts`. Export two functions: `generateIcsForDeadline(deadline)` for a single deadline and `generateIcsForDeadlines(deadlines)` for bulk export. Use the `ics` package's `createEvent` and `createEvents` functions. Key implementation details:
+  - [x] 1.1 Create and checkout branch: `git checkout -b feature/ics-generator`
+  - [x] 1.2 **Write failing test:** Create `src/lib/ics-generator.test.ts`. Write a test that imports `generateIcsForDeadline` and verifies it returns a string containing `BEGIN:VCALENDAR` and `END:VCALENDAR` for a single deadline with a specific time (e.g., date `2026-03-15`, time `"14:00"`, label `"Proposal Due"`, rfpName `"NHS RFP"`). Run `npx jest src/lib/ics-generator.test.ts` to confirm it fails (RED).
+  - [x] 1.3 **Write failing test:** Add a test that verifies the returned `.ics` string contains a `SUMMARY` field with both the label and RFP name (e.g., `SUMMARY:Proposal Due - NHS RFP`). Run to confirm RED.
+  - [x] 1.4 **Write failing test:** Add a test that verifies a deadline **without** a time produces an all-day event (the start DateArray has only 3 elements `[year, month, day]`, which the `ics` package renders as an all-day event — look for `VALUE=DATE` or verify no `T` timestamp in `DTSTART`). Run to confirm RED.
+  - [x] 1.5 **Write failing test:** Add a test that verifies each event includes a `VALARM` with `TRIGGER:-P1D` (24-hour reminder). Run to confirm RED.
+  - [x] 1.6 **Write failing test:** Add a test that verifies a deadline with a non-null `context` field includes that context as the `DESCRIPTION` in the `.ics` output. Run to confirm RED.
+  - [x] 1.7 **Write failing test:** Add a test for `generateIcsForDeadlines` (plural) that accepts an array of deadlines and returns a single `.ics` string containing multiple `VEVENT` blocks. Verify the returned string contains `BEGIN:VEVENT` appearing once per deadline. Run to confirm RED.
+  - [x] 1.8 **Implement:** Create `src/lib/ics-generator.ts`. Export two functions: `generateIcsForDeadline(deadline)` for a single deadline and `generateIcsForDeadlines(deadlines)` for bulk export. Use the `ics` package's `createEvent` and `createEvents` functions. Key implementation details:
     - Accept deadline data matching the shape `{ date: Date | string, time: string | null, label: string, context: string | null, rfpName: string }`.
     - For timed deadlines: create a `DateArray` of `[year, month, day, hour, minute]` with `duration: { hours: 1 }`. **Important:** `ics` months are 1-indexed (January = 1), which matches `getMonth() + 1`.
     - For all-day deadlines (time is null): use `DateArray` of `[year, month, day]` for start and `[year, month, day + 1]` for end (iCal spec: DTEND is exclusive).
@@ -66,10 +66,10 @@ main
     - Set `title` to `"${label} - ${rfpName}"` and `description` to the context field (if present).
     - For `createEvents`, pass `{ calName: 'RFP Deadline Tracker', productId: 'rfp-tracker/ics' }` as header attributes.
     - Return the `.ics` string, or throw an error if generation fails.
-  - [ ] 1.9 **Verify GREEN:** Run `npx jest src/lib/ics-generator.test.ts` — all tests must pass.
-  - [ ] 1.10 **Add edge case test:** Write a test for a deadline with an empty/null context — verify the output does NOT contain a `DESCRIPTION` field. Run to confirm GREEN.
-  - [ ] 1.11 **Add edge case test:** Write a test for `generateIcsForDeadlines` with an empty array — verify it throws an error or returns an empty string gracefully. Run to confirm GREEN.
-  - [ ] 1.12 **Full regression:** Run `npx jest` to confirm all existing tests still pass.
+  - [x] 1.9 **Verify GREEN:** Run `npx jest src/lib/ics-generator.test.ts` — all tests must pass.
+  - [x] 1.10 **Add edge case test:** Write a test for a deadline with an empty/null context — verify the output does NOT contain a `DESCRIPTION` field. Run to confirm GREEN.
+  - [x] 1.11 **Add edge case test:** Write a test for `generateIcsForDeadlines` with an empty array — verify it throws an error or returns an empty string gracefully. Run to confirm GREEN.
+  - [x] 1.12 **Full regression:** Run `npx jest` to confirm all existing tests still pass.
   - [ ] 1.13 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 1.14 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 

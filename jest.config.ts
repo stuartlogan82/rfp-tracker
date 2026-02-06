@@ -25,7 +25,15 @@ const config: Config = {
         jsx: 'react-jsx',
       },
     }],
+    '^.+\\.jsx?$': ['ts-jest', {
+      tsconfig: {
+        allowJs: true,
+      },
+    }],
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(ics|nanoid)/)',
+  ],
 };
 
 export default config;
