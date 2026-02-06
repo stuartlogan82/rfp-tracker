@@ -4,12 +4,13 @@
 
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { IlamyCalendar, useIlamyCalendarContext } from '@ilamy/calendar';
 import dayjs from 'dayjs';
-import type { DeadlineWithRfp } from '@/types';
+import type { DeadlineWithRfp, Deadline } from '@/types';
 import { getUrgencyLevel, getUrgencyColor } from '@/lib/urgency';
 import { Button } from '@/components/ui/button';
+import CalendarEventPopup from './CalendarEventPopup';
 import '@/lib/dayjs-setup'; // Initialize dayjs plugins
 
 interface CalendarViewProps {
@@ -86,6 +87,9 @@ export default function CalendarView({
   onDeadlineUpdate,
   now = new Date(),
 }: CalendarViewProps) {
+  const [selectedDeadline, setSelectedDeadline] = useState<DeadlineWithRfp | null>(null);
+  const [popupOpen, setPopupOpen] = useState(false);
+
   // Convert deadlines to calendar events
   const calendarEvents = useMemo(() => {
     return deadlines.map((deadline) => {
@@ -133,22 +137,65 @@ export default function CalendarView({
   }, [deadlines, now]);
 
   const handleEventClick = (event: any) => {
-    // Will be handled by CalendarEventPopup in a later task
-    console.log('Event clicked:', event);
+    const deadline = event.data?.deadline;
+    if (deadline) {
+      setSelectedDeadline(deadline);
+      setPopupOpen(true);
+    }
+  };
+
+  const handleClosePopup = () => {
+    setPopupOpen(false);
+    setSelectedDeadline(null);
+  };
+
+  const handleUpdateDeadline = async (deadlineId: number, data: Partial<Deadline>) => {
+    // Call the existing PATCH /api/deadlines/[id] endpoint
+    const response = await fetch(`/api/deadlines/${deadlineId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to update deadline');
+    }
+
+    // Refresh the parent data
+    if (onDeadlineUpdate) {
+      onDeadlineUpdate();
+    }
+
+    // Close the popup
+    handleClosePopup();
   };
 
   return (
-    <div className="bg-white rounded-lg border shadow-sm">
-      <IlamyCalendar
-        events={calendarEvents}
-        initialView="month"
-        timezone="Europe/London"
-        timeFormat="24-hour"
-        firstDayOfWeek="monday"
-        headerComponent={<CalendarHeader />}
-        onEventClick={handleEventClick}
-        disableDragAndDrop={true}
+    <>
+      <div className="bg-white rounded-lg border shadow-sm">
+        <IlamyCalendar
+          events={calendarEvents}
+          initialView="month"
+          timezone="Europe/London"
+          timeFormat="24-hour"
+          firstDayOfWeek="monday"
+          headerComponent={<CalendarHeader />}
+          onEventClick={handleEventClick}
+          disableDragAndDrop={true}
+        />
+      </div>
+
+      <CalendarEventPopup
+        deadline={selectedDeadline}
+        open={popupOpen}
+        onClose={handleClosePopup}
+        onSelectRfp={onSelectRfp}
+        onUpdate={handleUpdateDeadline}
+        now={now}
       />
-    </div>
+    </>
   );
 }

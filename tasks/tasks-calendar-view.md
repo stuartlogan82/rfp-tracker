@@ -76,22 +76,22 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 5.4 Ensure each event chip displays both the RFP name and deadline label (truncated if needed) (implemented in event title format)
   - [x] 5.5 Run tests and confirm they pass: `npx jest src/components/CalendarView.test.tsx` (already passing)
 
-- [ ] 6.0 Build the CalendarEventPopup (detail dialog)
-  - [ ] 6.1 Write tests for CalendarEventPopup in read-only mode: displays deadline label, formatted date/time (Europe/London), context (if present), RFP name as a clickable link, completion status, and a "View RFP" button
-  - [ ] 6.2 Implement CalendarEventPopup component using the existing Dialog component from `src/components/ui/dialog.tsx`. Accept props: `deadline: DeadlineWithRfp | null`, `open: boolean`, `onClose: () => void`, `onSelectRfp: (rfpId: number) => void`, `onUpdate: (deadlineId: number, data: Partial<Deadline>) => Promise<void>`, `now?: Date`
-  - [ ] 6.3 Render the read-only detail view: deadline label as title, date formatted with `format()` from date-fns, time if available, context paragraph, RFP name badge, completion status indicator
-  - [ ] 6.4 Implement "View RFP" button that calls `onSelectRfp(deadline.rfpId)` and closes the popup
-  - [ ] 6.5 Wire up the popup in CalendarView: clicking an event sets the selected deadline and opens the popup
-  - [ ] 6.6 Run tests and confirm they pass: `npx jest src/components/CalendarEventPopup.test.tsx`
+- [x] 6.0 Build the CalendarEventPopup (detail dialog)
+  - [x] 6.1 Write tests for CalendarEventPopup in read-only mode: displays deadline label, formatted date/time (Europe/London), context (if present), RFP name as a clickable link, completion status, and a "View RFP" button
+  - [x] 6.2 Implement CalendarEventPopup component using the existing Dialog component from `src/components/ui/dialog.tsx`. Accept props: `deadline: DeadlineWithRfp | null`, `open: boolean`, `onClose: () => void`, `onSelectRfp: (rfpId: number) => void`, `onUpdate: (deadlineId: number, data: Partial<Deadline>) => Promise<void>`, `now?: Date`
+  - [x] 6.3 Render the read-only detail view: deadline label as title, date formatted with `format()` from date-fns, time if available, context paragraph, RFP name badge, completion status indicator
+  - [x] 6.4 Implement "View RFP" button that calls `onSelectRfp(deadline.rfpId)` and closes the popup
+  - [x] 6.5 Wire up the popup in CalendarView: clicking an event sets the selected deadline and opens the popup
+  - [x] 6.6 Run tests and confirm they pass: `npx jest src/components/CalendarEventPopup.test.tsx`
 
-- [ ] 7.0 Add inline quick-edit functionality to the popup
-  - [ ] 7.1 Write tests for edit mode: clicking "Edit" button switches to edit mode with input fields for label (text), date (date picker), and completed (checkbox). "Save" calls the update handler. "Cancel" reverts to read-only mode without saving. Loading state shown while saving. Error message displayed on save failure
-  - [ ] 7.2 Implement edit mode toggle: an "Edit" button in the read-only view switches to edit mode with local state for edited values
-  - [ ] 7.3 Implement edit form fields: text input for label, date input for date, checkbox for completed status
-  - [ ] 7.4 Implement "Save" button: calls `onUpdate(deadline.id, { label, date, completed })` which uses the existing `PATCH /api/deadlines/[id]` endpoint. Show a loading spinner while saving. On success, close edit mode and update the view. On failure, display an error message
-  - [ ] 7.5 Implement "Cancel" button: reverts local state to original values and returns to read-only view
-  - [ ] 7.6 Wire up the `onDeadlineUpdate` callback in Dashboard so that after a successful quick-edit save, `refreshData()` is called to update both the calendar and table views
-  - [ ] 7.7 Run tests and confirm they pass: `npx jest src/components/CalendarEventPopup.test.tsx`
+- [x] 7.0 Add inline quick-edit functionality to the popup
+  - [x] 7.1 Write tests for edit mode: clicking "Edit" button switches to edit mode with input fields for label (text), date (date picker), and completed (checkbox). "Save" calls the update handler. "Cancel" reverts to read-only mode without saving. Loading state shown while saving. Error message displayed on save failure
+  - [x] 7.2 Implement edit mode toggle: an "Edit" button in the read-only view switches to edit mode with local state for edited values
+  - [x] 7.3 Implement edit form fields: text input for label, date input for date, checkbox for completed status
+  - [x] 7.4 Implement "Save" button: calls `onUpdate(deadline.id, { label, date, completed })` which uses the existing `PATCH /api/deadlines/[id]` endpoint. Show a loading spinner while saving. On success, close edit mode and update the view. On failure, display an error message
+  - [x] 7.5 Implement "Cancel" button: reverts local state to original values and returns to read-only view
+  - [x] 7.6 Wire up the `onDeadlineUpdate` callback in Dashboard so that after a successful quick-edit save, `refreshData()` is called to update both the calendar and table views (already wired via onDeadlineUpdate prop)
+  - [x] 7.7 Run tests and confirm they pass: `npx jest src/components/CalendarEventPopup.test.tsx`
 
 - [ ] 8.0 Integration, filtering, and polish
   - [ ] 8.1 Write integration tests: verify that the "Show all RFPs" filter applies to both table and calendar views, verify that toggling between views preserves the filter state, verify that completing a deadline via the calendar popup updates both views
