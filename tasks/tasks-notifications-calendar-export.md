@@ -90,7 +90,7 @@ main
   - [x] 2.11 **Commit:** Stage and commit all changes with a descriptive message.
   - [x] 2.12 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
-- [ ] 3.0 Build NotificationBanner component (`src/components/NotificationBanner.tsx`)
+- [x] 3.0 Build NotificationBanner component (`src/components/NotificationBanner.tsx`)
   - [x] 3.1 Merge `feature/export-api` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/notification-banner`
   - [x] 3.2 **Write failing test:** Create `src/components/NotificationBanner.test.tsx`. Write a test that renders `<NotificationBanner deadlines={[...]} now={fixedDate} />` with one deadline within 3 days (critical) and asserts the banner is visible with text matching "1 deadline" and "within 3 days". Use `now` prop set to a fixed date for deterministic testing. Run to confirm RED.
   - [x] 3.3 **Write failing test:** Add a test with multiple urgent deadlines (2 critical + 1 overdue) and verify the banner shows the correct count (e.g., "3 deadlines are due within 3 days"). Run to confirm RED.
@@ -110,7 +110,7 @@ main
   - [x] 3.9 **Verify GREEN:** Run `npx jest src/components/NotificationBanner.test.tsx` — all tests must pass.
   - [x] 3.10 **Add edge case test:** Verify banner shows correctly with exactly 1 deadline (singular text: "1 deadline is due" not "1 deadlines are due"). Run to confirm GREEN.
   - [x] 3.11 **Full regression:** Run `npx jest` to confirm all existing tests still pass.
-  - [ ] 3.12 **Commit:** Stage and commit all changes with a descriptive message.
+  - [x] 3.12 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 3.13 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 4.0 Add export buttons to Dashboard and DeadlineTable
