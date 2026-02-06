@@ -106,15 +106,15 @@ Update the file after completing each sub-task, not just after completing an ent
 
 - [x] 7.0 In-app notifications & calendar export — **See `tasks/tasks-notifications-calendar-export.md` for detailed sub-tasks**
 
-- [ ] 8.0 Testing & final polish
-  - [ ] 8.1 Create and checkout a new feature branch (`git checkout -b feature/testing-polish`)
-  - [ ] 8.2 Test document upload with each supported format (PDF, DOCX, XLSX, PNG, JPG, TIFF) and verify files are stored correctly
-  - [ ] 8.3 Test AI date extraction with a sample RFP document and verify dates are correctly identified and structured
-  - [ ] 8.4 Test the date review flow — edit, delete, and add dates manually, then confirm and verify they persist
-  - [ ] 8.5 Test RFP CRUD — create, edit status, delete, and verify cascade behavior (deleting RFP removes deadlines and documents)
-  - [ ] 8.6 Test urgency color-coding with deadlines at various date ranges (overdue, 1 day, 5 days, 14 days)
-  - [ ] 8.7 Test `.ics` export — download individual and bulk exports, import into a calendar app, verify dates and labels
-  - [ ] 8.8 Test timezone handling — verify all dates display correctly in Europe/London timezone
-  - [ ] 8.9 Test notification banner appears when deadlines are within 3 days and does not appear otherwise
-  - [ ] 8.10 UI polish — verify consistent styling, loading states, error messages, and empty states throughout the app
-  - [ ] 8.11 Add error handling for edge cases: empty documents, documents with no dates, API key missing, network failures
+- [x] 8.0 Testing & final polish
+  - [x] 8.1 Create and checkout a new feature branch (`git checkout -b feature/testing-polish`)
+  - [x] 8.2 Test document upload with each supported format (PDF, DOCX, XLSX, PNG, JPG, TIFF) and verify files are stored correctly
+  - [x] 8.3 Test AI date extraction with a sample RFP document and verify dates are correctly identified and structured
+  - [x] 8.4 Test the date review flow — edit, delete, and add dates manually, then confirm and verify they persist
+  - [x] 8.5 Test RFP CRUD — create, edit status, delete, and verify cascade behavior (deleting RFP removes deadlines and documents)
+  - [x] 8.6 Test urgency color-coding with deadlines at various date ranges (overdue, 1 day, 5 days, 14 days)
+  - [x] 8.7 Test `.ics` export — download individual and bulk exports, import into a calendar app, verify dates and labels
+  - [x] 8.8 Test timezone handling — verify all dates display correctly in Europe/London timezone
+  - [x] 8.9 Test notification banner appears when deadlines are within 3 days and does not appear otherwise
+  - [x] 8.10 UI polish — verify consistent styling, loading states, error messages, and empty states throughout the app
+  - [x] 8.11 Add error handling for edge cases: empty documents, documents with no dates, API key missing, network failures

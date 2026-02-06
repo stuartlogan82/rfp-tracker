@@ -262,6 +262,30 @@ describe('DateReview', () => {
     expect(mockOnSave).not.toHaveBeenCalled();
   });
 
+  it('shows user-friendly error on network failure during save', async () => {
+    const user = userEvent.setup();
+    const mockFetch = global.fetch as jest.MockedFunction<typeof fetch>;
+    mockFetch.mockRejectedValue(new Error('Network error'));
+
+    render(
+      <DateReview
+        dates={mockDates}
+        rfpId={1}
+        onSave={mockOnSave}
+        onCancel={mockOnCancel}
+      />
+    );
+
+    const confirmButton = screen.getByRole('button', { name: /confirm & save/i });
+    await user.click(confirmButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/network error/i)).toBeInTheDocument();
+    });
+
+    expect(mockOnSave).not.toHaveBeenCalled();
+  });
+
   it('displays empty state when no dates provided', () => {
     render(
       <DateReview

@@ -37,7 +37,6 @@ model Deadline {
   label          String
   context        String?
   completed      Boolean  @default(false)
-  googleEventId  String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
@@ -53,13 +52,4 @@ model Document {
   uploadedAt DateTime @default(now())
 
   rfp        Rfp      @relation(fields: [rfpId], references: [id], onDelete: Cascade)
-}
-
-model GoogleAuth {
-  id           Int      @id @default(autoincrement())
-  accessToken  String
-  refreshToken String
-  expiresAt    DateTime
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
 }

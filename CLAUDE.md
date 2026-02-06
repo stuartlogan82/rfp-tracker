@@ -14,7 +14,6 @@ RFP Deadline Tracker — a single-user web dashboard for a public sector Sales E
 - **AI:** OpenAI API (GPT-4o, including vision for scanned documents)
 - **Document parsing:** pdf-parse, mammoth (DOCX), xlsx
 - **Calendar export:** ics npm package
-- **Google Calendar sync:** googleapis npm package (OAuth 2.0 integration)
 - **Timezone:** All dates in Europe/London (GMT/BST)
 
 ### Prisma 7 Important Notes

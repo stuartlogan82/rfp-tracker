@@ -115,6 +115,64 @@ describe('UploadZone', () => {
     expect(dropZone).toBeInTheDocument();
   });
 
+  it('shows user-friendly error on network failure', async () => {
+    (global.fetch as jest.Mock).mockRejectedValue(new Error('Failed to fetch'));
+
+    render(<UploadZone rfpId={mockRfpId} onUploadComplete={mockOnUploadComplete} />);
+
+    const file = new File(['test'], 'test.pdf', { type: 'application/pdf' });
+    const input = screen.getByTestId('file-input');
+
+    fireEvent.change(input, { target: { files: [file] } });
+
+    await waitFor(() => {
+      expect(screen.getByText(/error/i)).toBeInTheDocument();
+      expect(screen.getByText(/failed to fetch/i)).toBeInTheDocument();
+    });
+
+    expect(mockOnUploadComplete).not.toHaveBeenCalled();
+  });
+
+  it('shows error when upload succeeds but extraction fails', async () => {
+    const mockOnExtractComplete = jest.fn();
+
+    // First call (upload) succeeds, second call (extract) fails
+    (global.fetch as jest.Mock)
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          document: { id: 1, filename: 'test.pdf', filepath: '/uploads/test.pdf' },
+        }),
+      })
+      .mockResolvedValueOnce({
+        ok: false,
+        json: async () => ({ error: 'Extraction failed' }),
+      });
+
+    render(
+      <UploadZone
+        rfpId={mockRfpId}
+        onUploadComplete={mockOnUploadComplete}
+        onExtractComplete={mockOnExtractComplete}
+      />
+    );
+
+    const file = new File(['test'], 'test.pdf', { type: 'application/pdf' });
+    const input = screen.getByTestId('file-input');
+
+    fireEvent.change(input, { target: { files: [file] } });
+
+    await waitFor(() => {
+      expect(screen.getByText(/error/i)).toBeInTheDocument();
+      expect(screen.getByText(/extraction failed/i)).toBeInTheDocument();
+    });
+
+    // Upload callback should have been called since upload succeeded
+    expect(mockOnUploadComplete).toHaveBeenCalled();
+    // Extract callback should NOT have been called
+    expect(mockOnExtractComplete).not.toHaveBeenCalled();
+  });
+
   it('uploads file when dropped', async () => {
     render(<UploadZone rfpId={mockRfpId} onUploadComplete={mockOnUploadComplete} />);
 

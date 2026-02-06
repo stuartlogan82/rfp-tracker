@@ -93,7 +93,7 @@ export default function CalendarView({
   // Convert deadlines to calendar events
   const calendarEvents = useMemo(() => {
     return deadlines.map((deadline) => {
-      const urgencyLevel = getUrgencyLevel(deadline.date, deadline.completed, now);
+      const urgencyLevel = getUrgencyLevel(deadline.date as unknown as string, deadline.completed, now);
       const urgencyColors = getUrgencyColor(urgencyLevel);
 
       // Parse date and time

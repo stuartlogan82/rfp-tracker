@@ -52,7 +52,7 @@ export default function CalendarEventPopup({
   const handleEdit = () => {
     // Initialize edit form with current values
     setEditedLabel(deadline.label);
-    setEditedDate(deadline.date);
+    setEditedDate(typeof deadline.date === 'string' ? deadline.date : format(deadline.date, 'yyyy-MM-dd'));
     setEditedCompleted(deadline.completed);
     setError(null);
     setEditMode(true);
@@ -70,7 +70,7 @@ export default function CalendarEventPopup({
 
       await onUpdate(deadline.id, {
         label: editedLabel,
-        date: editedDate,
+        date: editedDate as unknown as Date,
         completed: editedCompleted,
       });
 
@@ -87,7 +87,7 @@ export default function CalendarEventPopup({
     onClose();
   };
 
-  const formattedDate = format(parseISO(deadline.date), 'dd MMMM yyyy');
+  const formattedDate = format(typeof deadline.date === 'string' ? parseISO(deadline.date) : deadline.date, 'dd MMMM yyyy');
   const formattedTime = deadline.time || null;
 
   return (
