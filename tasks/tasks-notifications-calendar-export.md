@@ -49,7 +49,7 @@ main
 
 ## Tasks
 
-- [ ] 1.0 Build ICS generator utility (`src/lib/ics-generator.ts`)
+- [x] 1.0 Build ICS generator utility (`src/lib/ics-generator.ts`)
   - [x] 1.1 Create and checkout branch: `git checkout -b feature/ics-generator`
   - [x] 1.2 **Write failing test:** Create `src/lib/ics-generator.test.ts`. Write a test that imports `generateIcsForDeadline` and verifies it returns a string containing `BEGIN:VCALENDAR` and `END:VCALENDAR` for a single deadline with a specific time (e.g., date `2026-03-15`, time `"14:00"`, label `"Proposal Due"`, rfpName `"NHS RFP"`). Run `npx jest src/lib/ics-generator.test.ts` to confirm it fails (RED).
   - [x] 1.3 **Write failing test:** Add a test that verifies the returned `.ics` string contains a `SUMMARY` field with both the label and RFP name (e.g., `SUMMARY:Proposal Due - NHS RFP`). Run to confirm RED.
@@ -71,22 +71,22 @@ main
   - [x] 1.11 **Add edge case test:** Write a test for `generateIcsForDeadlines` with an empty array — verify it throws an error or returns an empty string gracefully. Run to confirm GREEN.
   - [x] 1.12 **Full regression:** Run `npx jest` to confirm all existing tests still pass.
   - [x] 1.13 **Commit:** Stage and commit all changes with a descriptive message.
-  - [ ] 1.14 **CHECKPOINT — Wait for user to test and approve before merging to main.**
+  - [x] 1.14 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 2.0 Build calendar export API route (`src/app/api/export/route.ts`)
-  - [ ] 2.1 Merge `feature/ics-generator` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/export-api`
-  - [ ] 2.2 **Write failing test:** Create `src/app/api/export/route.test.ts` with `@jest-environment node` docblock. Set up database cleanup in `beforeEach` (delete all deadlines and RFPs). Write a test that creates an RFP and a deadline via Prisma, then calls `GET /api/export?deadlineId=<id>` and asserts the response has status 200, `Content-Type` header containing `text/calendar`, and body containing `BEGIN:VCALENDAR`. Run to confirm RED.
-  - [ ] 2.3 **Write failing test:** Add a test that verifies the response includes a `Content-Disposition` header with `attachment` and a `.ics` filename. Run to confirm RED.
-  - [ ] 2.4 **Write failing test:** Add a test for `GET /api/export?deadlineId=999` (non-existent ID) — assert it returns 404 with a JSON error. Run to confirm RED.
-  - [ ] 2.5 **Write failing test:** Add a test for `GET /api/export?deadlineId=abc` (invalid ID) — assert it returns 400. Run to confirm RED.
-  - [ ] 2.6 **Write failing test:** Add a test for bulk export `GET /api/export` (no params) — create multiple RFPs with deadlines (mix of Active and Won statuses, completed and incomplete). Assert the response contains only incomplete deadlines from Active RFPs. Verify the response body contains multiple `VEVENT` blocks. Run to confirm RED.
-  - [ ] 2.7 **Write failing test:** Add a test for bulk export when there are no qualifying deadlines — assert it returns 404 with a descriptive message. Run to confirm RED.
-  - [ ] 2.8 **Implement:** Create `src/app/api/export/route.ts` with a `GET` handler. Parse `deadlineId` from `request.nextUrl.searchParams`. Implementation:
+  - [x] 2.1 Merge `feature/ics-generator` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/export-api`
+  - [x] 2.2 **Write failing test:** Create `src/app/api/export/route.test.ts` with `@jest-environment node` docblock. Set up database cleanup in `beforeEach` (delete all deadlines and RFPs). Write a test that creates an RFP and a deadline via Prisma, then calls `GET /api/export?deadlineId=<id>` and asserts the response has status 200, `Content-Type` header containing `text/calendar`, and body containing `BEGIN:VCALENDAR`. Run to confirm RED.
+  - [x] 2.3 **Write failing test:** Add a test that verifies the response includes a `Content-Disposition` header with `attachment` and a `.ics` filename. Run to confirm RED.
+  - [x] 2.4 **Write failing test:** Add a test for `GET /api/export?deadlineId=999` (non-existent ID) — assert it returns 404 with a JSON error. Run to confirm RED.
+  - [x] 2.5 **Write failing test:** Add a test for `GET /api/export?deadlineId=abc` (invalid ID) — assert it returns 400. Run to confirm RED.
+  - [x] 2.6 **Write failing test:** Add a test for bulk export `GET /api/export` (no params) — create multiple RFPs with deadlines (mix of Active and Won statuses, completed and incomplete). Assert the response contains only incomplete deadlines from Active RFPs. Verify the response body contains multiple `VEVENT` blocks. Run to confirm RED.
+  - [x] 2.7 **Write failing test:** Add a test for bulk export when there are no qualifying deadlines — assert it returns 404 with a descriptive message. Run to confirm RED.
+  - [x] 2.8 **Implement:** Create `src/app/api/export/route.ts` with a `GET` handler. Parse `deadlineId` from `request.nextUrl.searchParams`. Implementation:
     - **Single export (`deadlineId` provided):** Validate ID is a number (return 400 if not). Fetch the deadline with its parent RFP via `prisma.deadline.findUnique({ where: { id }, include: { rfp: true } })`. Return 404 if not found. Call `generateIcsForDeadline()` with the deadline data. Return `new Response(icsString, { headers })` with `Content-Type: text/calendar; charset=utf-8` and `Content-Disposition: attachment; filename="<slugified-label>.ics"`.
     - **Bulk export (no `deadlineId`):** Fetch all incomplete deadlines from Active RFPs: `prisma.deadline.findMany({ where: { completed: false, rfp: { status: 'Active' } }, include: { rfp: true }, orderBy: { date: 'asc' } })`. Return 404 if none found. Call `generateIcsForDeadlines()`. Return response with filename `rfp-deadlines-<YYYY-MM-DD>.ics`.
     - Wrap in try/catch — return 500 with JSON error on unexpected failures.
-  - [ ] 2.9 **Verify GREEN:** Run `npx jest src/app/api/export/route.test.ts` — all tests must pass.
-  - [ ] 2.10 **Full regression:** Run `npx jest` to confirm no regressions in existing tests.
+  - [x] 2.9 **Verify GREEN:** Run `npx jest src/app/api/export/route.test.ts` — all tests must pass.
+  - [x] 2.10 **Full regression:** Run `npx jest` to confirm no regressions in existing tests.
   - [ ] 2.11 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 2.12 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 

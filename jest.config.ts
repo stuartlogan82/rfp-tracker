@@ -34,6 +34,9 @@ const config: Config = {
   transformIgnorePatterns: [
     'node_modules/(?!(ics|nanoid)/)',
   ],
+  // Run tests sequentially — multiple suites share a single SQLite database
+  // and concurrent beforeEach deleteMany() calls cause race conditions
+  maxWorkers: 1,
 };
 
 export default config;
