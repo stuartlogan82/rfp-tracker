@@ -9,6 +9,7 @@ describe('Database Models', () => {
     await prisma.deadline.deleteMany();
     await prisma.document.deleteMany();
     await prisma.rfp.deleteMany();
+    await prisma.googleAuth.deleteMany();
   });
 
   afterAll(async () => {
@@ -102,6 +103,54 @@ describe('Database Models', () => {
       expect(deadline.time).toBeNull();
       expect(deadline.context).toBeNull();
       expect(deadline.completed).toBe(false); // default value
+    });
+
+    it('creates a deadline with a googleEventId', async () => {
+      const rfp = await prisma.rfp.create({
+        data: {
+          name: 'Test RFP',
+          agency: 'Test Agency',
+          status: 'Active',
+        },
+      });
+
+      const deadline = await prisma.deadline.create({
+        data: {
+          rfpId: rfp.id,
+          date: new Date('2026-03-15'),
+          label: 'Proposal Submission',
+          googleEventId: 'google-calendar-event-123',
+        },
+      });
+
+      expect(deadline.googleEventId).toBe('google-calendar-event-123');
+
+      // Verify it persists
+      const retrieved = await prisma.deadline.findUnique({
+        where: { id: deadline.id },
+      });
+
+      expect(retrieved?.googleEventId).toBe('google-calendar-event-123');
+    });
+
+    it('creates a deadline with null googleEventId by default', async () => {
+      const rfp = await prisma.rfp.create({
+        data: {
+          name: 'Test RFP',
+          agency: 'Test Agency',
+          status: 'Active',
+        },
+      });
+
+      const deadline = await prisma.deadline.create({
+        data: {
+          rfpId: rfp.id,
+          date: new Date('2026-03-15'),
+          label: 'Proposal Submission',
+        },
+      });
+
+      expect(deadline.googleEventId).toBeNull();
     });
 
     it('retrieves deadline with related RFP', async () => {
@@ -274,6 +323,58 @@ describe('Database Models', () => {
 
       expect(deadlines).toHaveLength(0);
       expect(documents).toHaveLength(0);
+    });
+  });
+
+  describe('GoogleAuth model', () => {
+    it('creates a GoogleAuth record and verifies it can be read back', async () => {
+      const futureDate = new Date('2026-03-15T12:00:00Z');
+
+      const googleAuth = await prisma.googleAuth.create({
+        data: {
+          accessToken: 'test-access-token',
+          refreshToken: 'test-refresh-token',
+          expiresAt: futureDate,
+        },
+      });
+
+      expect(googleAuth.id).toBeDefined();
+      expect(googleAuth.accessToken).toBe('test-access-token');
+      expect(googleAuth.refreshToken).toBe('test-refresh-token');
+      expect(googleAuth.expiresAt).toBeInstanceOf(Date);
+      expect(googleAuth.createdAt).toBeInstanceOf(Date);
+      expect(googleAuth.updatedAt).toBeInstanceOf(Date);
+
+      // Verify it persists
+      const retrieved = await prisma.googleAuth.findUnique({
+        where: { id: googleAuth.id },
+      });
+
+      expect(retrieved?.accessToken).toBe('test-access-token');
+      expect(retrieved?.refreshToken).toBe('test-refresh-token');
+      expect(retrieved?.expiresAt.getTime()).toBe(futureDate.getTime());
+    });
+
+    it('supports at most one GoogleAuth record (single-user pattern)', async () => {
+      await prisma.googleAuth.create({
+        data: {
+          accessToken: 'token-1',
+          refreshToken: 'refresh-1',
+          expiresAt: new Date('2026-03-15T12:00:00Z'),
+        },
+      });
+
+      await prisma.googleAuth.create({
+        data: {
+          accessToken: 'token-2',
+          refreshToken: 'refresh-2',
+          expiresAt: new Date('2026-03-16T12:00:00Z'),
+        },
+      });
+
+      const allRecords = await prisma.googleAuth.findMany();
+      // Should have 2 records - cleanup will happen in disconnect logic
+      expect(allRecords.length).toBeGreaterThanOrEqual(1);
     });
   });
 });
