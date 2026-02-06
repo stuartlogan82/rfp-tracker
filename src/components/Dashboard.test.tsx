@@ -601,4 +601,127 @@ describe('Dashboard', () => {
       expect(exportAllLink).toHaveAttribute('download');
     });
   });
+
+  describe('View toggle (Table | Calendar)', () => {
+    it('renders ViewToggle component with Table as default', async () => {
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ rfps: mockRfps }),
+      });
+
+      render(<Dashboard />);
+
+      await waitFor(() => {
+        expect(screen.getByTestId('deadline-table')).toBeInTheDocument();
+      });
+
+      expect(screen.getByText('Table')).toBeInTheDocument();
+      expect(screen.getByText('Calendar')).toBeInTheDocument();
+    });
+
+    it('switching to Calendar view hides DeadlineTable and shows CalendarView', async () => {
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ rfps: mockRfps }),
+      });
+
+      render(<Dashboard />);
+      const user = userEvent.setup();
+
+      await waitFor(() => {
+        expect(screen.getByTestId('deadline-table')).toBeInTheDocument();
+      });
+
+      // Click Calendar
+      await user.click(screen.getByText('Calendar'));
+
+      // DeadlineTable should be hidden
+      expect(screen.queryByTestId('deadline-table')).not.toBeInTheDocument();
+
+      // CalendarView placeholder should be visible
+      expect(screen.getByTestId('calendar-view')).toBeInTheDocument();
+    });
+
+    it('switching back to Table view hides CalendarView and shows DeadlineTable', async () => {
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ rfps: mockRfps }),
+      });
+
+      render(<Dashboard />);
+      const user = userEvent.setup();
+
+      await waitFor(() => {
+        expect(screen.getByTestId('deadline-table')).toBeInTheDocument();
+      });
+
+      // Switch to Calendar
+      await user.click(screen.getByText('Calendar'));
+      expect(screen.getByTestId('calendar-view')).toBeInTheDocument();
+
+      // Switch back to Table
+      await user.click(screen.getByText('Table'));
+
+      // DeadlineTable should be visible again
+      expect(screen.getByTestId('deadline-table')).toBeInTheDocument();
+      expect(screen.queryByTestId('calendar-view')).not.toBeInTheDocument();
+    });
+
+    it('does not trigger data re-fetch when switching views', async () => {
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ rfps: mockRfps }),
+      });
+
+      render(<Dashboard />);
+      const user = userEvent.setup();
+
+      await waitFor(() => {
+        expect(screen.getByTestId('deadline-table')).toBeInTheDocument();
+      });
+
+      // Only one fetch so far (initial load)
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+
+      // Switch to Calendar
+      await user.click(screen.getByText('Calendar'));
+
+      // No additional fetch
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+
+      // Switch back to Table
+      await user.click(screen.getByText('Table'));
+
+      // Still no additional fetch
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+    });
+
+    it('ViewToggle is not shown when an RFP detail view is selected', async () => {
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ rfps: mockRfps }),
+      });
+
+      render(<Dashboard />);
+      const user = userEvent.setup();
+
+      await waitFor(() => {
+        expect(screen.getByTestId('sidebar')).toBeInTheDocument();
+      });
+
+      // ViewToggle should be visible initially
+      expect(screen.getByText('Table')).toBeInTheDocument();
+
+      // Navigate to detail view
+      await user.click(screen.getByTestId('rfp-1'));
+
+      await waitFor(() => {
+        expect(screen.getByTestId('rfp-detail')).toBeInTheDocument();
+      });
+
+      // ViewToggle should not be visible in detail view
+      expect(screen.queryByText('Table')).not.toBeInTheDocument();
+      expect(screen.queryByText('Calendar')).not.toBeInTheDocument();
+    });
+  });
 });

@@ -14,6 +14,7 @@ import DeadlineTable from './DeadlineTable';
 import RfpDetail from './RfpDetail';
 import NewRfpDialog from './NewRfpDialog';
 import NotificationBanner from './NotificationBanner';
+import ViewToggle, { type ViewMode } from './ViewToggle';
 
 export default function Dashboard() {
   // State management
@@ -24,6 +25,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [updateError, setUpdateError] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>('table'); // Default: Table view
 
   // Fetch RFPs from API
   const refreshData = async () => {
@@ -240,7 +242,7 @@ export default function Dashboard() {
             </div>
           )}
 
-          {/* Dashboard view - Summary cards and deadline table */}
+          {/* Dashboard view - Summary cards and deadline table/calendar */}
           {!selectedRfp && (
             <>
               {/* Notification Banner for urgent deadlines */}
@@ -253,11 +255,23 @@ export default function Dashboard() {
                 />
               </div>
 
-              <DeadlineTable
-                deadlines={filteredDeadlines}
-                onSelectRfp={handleSelectRfp}
-                onToggleComplete={handleToggleComplete}
-              />
+              {/* View Toggle */}
+              <div className="mb-4">
+                <ViewToggle activeView={viewMode} onViewChange={setViewMode} />
+              </div>
+
+              {/* Conditional rendering: Table or Calendar */}
+              {viewMode === 'table' ? (
+                <DeadlineTable
+                  deadlines={filteredDeadlines}
+                  onSelectRfp={handleSelectRfp}
+                  onToggleComplete={handleToggleComplete}
+                />
+              ) : (
+                <div data-testid="calendar-view">
+                  Calendar view placeholder
+                </div>
+              )}
             </>
           )}
 
