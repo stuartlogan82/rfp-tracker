@@ -76,7 +76,7 @@ main
   - [x] 1.7 Run `npx prisma generate` to regenerate the Prisma client.
   - [x] 1.8 **Write test:** In `src/lib/db.test.ts`, add a test that creates a `GoogleAuth` record and verifies it can be read back. Add a test that creates a `Deadline` with a `googleEventId` and verifies it persists. Run to confirm GREEN.
   - [x] 1.9 **Full regression:** Run `npx jest` to confirm all existing tests still pass with the schema changes.
-  - [ ] 1.10 **Commit:** Stage and commit all changes with a descriptive message.
+  - [x] 1.10 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 1.11 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 2.0 Google OAuth authentication flow
