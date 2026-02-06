@@ -115,7 +115,7 @@ main
     - All functions should handle errors gracefully (try/catch, log errors, throw or return null).
   - [x] 3.10 **Verify GREEN:** Run `npx jest src/lib/google-calendar.test.ts` — all tests must pass.
   - [x] 3.11 **Full regression:** Run `npx jest` to confirm no regressions.
-  - [ ] 3.12 **Commit:** Stage and commit all changes with a descriptive message.
+  - [x] 3.12 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 3.13 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 4.0 Auto-sync on deadline create, update, delete, and complete
