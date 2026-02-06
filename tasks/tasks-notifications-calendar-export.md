@@ -73,7 +73,7 @@ main
   - [x] 1.13 **Commit:** Stage and commit all changes with a descriptive message.
   - [x] 1.14 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
-- [ ] 2.0 Build calendar export API route (`src/app/api/export/route.ts`)
+- [x] 2.0 Build calendar export API route (`src/app/api/export/route.ts`)
   - [x] 2.1 Merge `feature/ics-generator` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/export-api`
   - [x] 2.2 **Write failing test:** Create `src/app/api/export/route.test.ts` with `@jest-environment node` docblock. Set up database cleanup in `beforeEach` (delete all deadlines and RFPs). Write a test that creates an RFP and a deadline via Prisma, then calls `GET /api/export?deadlineId=<id>` and asserts the response has status 200, `Content-Type` header containing `text/calendar`, and body containing `BEGIN:VCALENDAR`. Run to confirm RED.
   - [x] 2.3 **Write failing test:** Add a test that verifies the response includes a `Content-Disposition` header with `attachment` and a `.ics` filename. Run to confirm RED.
@@ -88,17 +88,17 @@ main
   - [x] 2.9 **Verify GREEN:** Run `npx jest src/app/api/export/route.test.ts` — all tests must pass.
   - [x] 2.10 **Full regression:** Run `npx jest` to confirm no regressions in existing tests.
   - [x] 2.11 **Commit:** Stage and commit all changes with a descriptive message.
-  - [ ] 2.12 **CHECKPOINT — Wait for user to test and approve before merging to main.**
+  - [x] 2.12 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 3.0 Build NotificationBanner component (`src/components/NotificationBanner.tsx`)
-  - [ ] 3.1 Merge `feature/export-api` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/notification-banner`
-  - [ ] 3.2 **Write failing test:** Create `src/components/NotificationBanner.test.tsx`. Write a test that renders `<NotificationBanner deadlines={[...]} now={fixedDate} />` with one deadline within 3 days (critical) and asserts the banner is visible with text matching "1 deadline" and "within 3 days". Use `now` prop set to a fixed date for deterministic testing. Run to confirm RED.
-  - [ ] 3.3 **Write failing test:** Add a test with multiple urgent deadlines (2 critical + 1 overdue) and verify the banner shows the correct count (e.g., "3 deadlines are due within 3 days"). Run to confirm RED.
-  - [ ] 3.4 **Write failing test:** Add a test with only safe/warning deadlines (none within 3 days) and verify the banner is NOT rendered (returns null). Run to confirm RED.
-  - [ ] 3.5 **Write failing test:** Add a test that clicks the dismiss button and verifies the banner disappears from the DOM. Run to confirm RED.
-  - [ ] 3.6 **Write failing test:** Add a test that clicks the expand toggle and verifies the individual deadline labels become visible in an expanded list. Run to confirm RED.
-  - [ ] 3.7 **Write failing test:** Add a test that completed deadlines are excluded even if their date is within 3 days — render with a completed critical deadline and verify the banner does NOT appear. Run to confirm RED.
-  - [ ] 3.8 **Implement:** Create `src/components/NotificationBanner.tsx` as a `'use client'` component. Props: `{ deadlines: DeadlineWithRfp[], now?: Date }`. Implementation:
+  - [x] 3.1 Merge `feature/export-api` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/notification-banner`
+  - [x] 3.2 **Write failing test:** Create `src/components/NotificationBanner.test.tsx`. Write a test that renders `<NotificationBanner deadlines={[...]} now={fixedDate} />` with one deadline within 3 days (critical) and asserts the banner is visible with text matching "1 deadline" and "within 3 days". Use `now` prop set to a fixed date for deterministic testing. Run to confirm RED.
+  - [x] 3.3 **Write failing test:** Add a test with multiple urgent deadlines (2 critical + 1 overdue) and verify the banner shows the correct count (e.g., "3 deadlines are due within 3 days"). Run to confirm RED.
+  - [x] 3.4 **Write failing test:** Add a test with only safe/warning deadlines (none within 3 days) and verify the banner is NOT rendered (returns null). Run to confirm RED.
+  - [x] 3.5 **Write failing test:** Add a test that clicks the dismiss button and verifies the banner disappears from the DOM. Run to confirm RED.
+  - [x] 3.6 **Write failing test:** Add a test that clicks the expand toggle and verifies the individual deadline labels become visible in an expanded list. Run to confirm RED.
+  - [x] 3.7 **Write failing test:** Add a test that completed deadlines are excluded even if their date is within 3 days — render with a completed critical deadline and verify the banner does NOT appear. Run to confirm RED.
+  - [x] 3.8 **Implement:** Create `src/components/NotificationBanner.tsx` as a `'use client'` component. Props: `{ deadlines: DeadlineWithRfp[], now?: Date }`. Implementation:
     - Use `useState(false)` for `dismissed` and `useState(false)` for `expanded`.
     - Filter deadlines using `getUrgencyLevel()` from `@/lib/urgency` — keep only those with level `'critical'` or `'overdue'` (which excludes completed deadlines, since `getUrgencyLevel` returns `'completed'` for those).
     - Return `null` if dismissed or no urgent deadlines.
@@ -107,9 +107,9 @@ main
     - Middle: expand/collapse chevron button toggling the `expanded` state.
     - Right side: dismiss (X) button setting `dismissed` to `true`.
     - When expanded: render a `<ul>` below the count text listing each urgent deadline's label and formatted date.
-  - [ ] 3.9 **Verify GREEN:** Run `npx jest src/components/NotificationBanner.test.tsx` — all tests must pass.
-  - [ ] 3.10 **Add edge case test:** Verify banner shows correctly with exactly 1 deadline (singular text: "1 deadline is due" not "1 deadlines are due"). Run to confirm GREEN.
-  - [ ] 3.11 **Full regression:** Run `npx jest` to confirm all existing tests still pass.
+  - [x] 3.9 **Verify GREEN:** Run `npx jest src/components/NotificationBanner.test.tsx` — all tests must pass.
+  - [x] 3.10 **Add edge case test:** Verify banner shows correctly with exactly 1 deadline (singular text: "1 deadline is due" not "1 deadlines are due"). Run to confirm GREEN.
+  - [x] 3.11 **Full regression:** Run `npx jest` to confirm all existing tests still pass.
   - [ ] 3.12 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 3.13 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
