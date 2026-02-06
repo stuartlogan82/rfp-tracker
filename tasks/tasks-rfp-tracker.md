@@ -104,13 +104,7 @@ Update the file after completing each sub-task, not just after completing an ent
 
 - [x] 6.0 Dashboard UI & deadline visualization — **See `tasks/tasks-dashboard-ui.md` for detailed sub-tasks**
 
-- [ ] 7.0 In-app notifications & calendar export
-  - [ ] 7.1 Create and checkout a new feature branch (`git checkout -b feature/notifications-calendar-export`)
-  - [ ] 7.2 Build the `NotificationBanner` component — a persistent or dismissable banner at the top of the dashboard that appears when any deadline is within 3 days
-  - [ ] 7.3 Create `src/lib/ics-generator.ts` utility to generate `.ics` file content from deadline data
-  - [ ] 7.4 Create `src/app/api/export/route.ts` API route that generates and returns `.ics` files — supports both single deadline export (by ID) and bulk export (all active RFP deadlines)
-  - [ ] 7.5 Add an "Export to Calendar" button on each deadline row in the dashboard
-  - [ ] 7.6 Add an "Export All" button in the dashboard header/toolbar that downloads a single `.ics` file with all upcoming active deadlines
+- [ ] 7.0 In-app notifications & calendar export — **See `tasks/tasks-notifications-calendar-export.md` for detailed sub-tasks**
 
 - [ ] 8.0 Testing & final polish
   - [ ] 8.1 Create and checkout a new feature branch (`git checkout -b feature/testing-polish`)
