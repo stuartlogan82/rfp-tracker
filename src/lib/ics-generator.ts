@@ -67,7 +67,8 @@ function buildEventAttributes(deadline: DeadlineForIcs): EventAttributes {
   const month = date.getUTCMonth() + 1; // ics package uses 1-indexed months
   const day = date.getUTCDate();
 
-  const event: EventAttributes = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const event: any = {
     title: `${deadline.label} - ${deadline.rfpName}`,
     startInputType: 'utc',
     startOutputType: 'utc',

@@ -17,9 +17,8 @@ export default function NotificationBanner({ deadlines, now }: NotificationBanne
   // Filter to only critical and overdue deadlines (excludes completed)
   const urgentDeadlines = deadlines.filter((deadline) => {
     // Handle both Date objects and string dates
-    const dateString = typeof deadline.date === 'string'
-      ? deadline.date.split('T')[0]
-      : deadline.date.toISOString().split('T')[0];
+    const date = deadline.date instanceof Date ? deadline.date : new Date(deadline.date);
+    const dateString = date.toISOString().split('T')[0];
 
     const urgency = getUrgencyLevel(
       dateString,

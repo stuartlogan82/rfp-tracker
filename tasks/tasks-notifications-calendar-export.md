@@ -125,16 +125,16 @@ main
   - [x] 4.9 **Verify GREEN:** Run `npx jest src/components/Dashboard.test.tsx` — all tests (old + new) must pass.
   - [x] 4.10 **Full regression:** Run `npx jest` to confirm zero regressions across all test files.
   - [x] 4.11 **Commit:** Stage and commit all changes with a descriptive message.
-  - [ ] 4.12 **CHECKPOINT — Wait for user to test and approve before merging to main.**
+  - [x] 4.12 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
-- [ ] 5.0 Integration verification & final polish
-  - [ ] 5.1 Merge `feature/export-buttons` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/final-polish`
-  - [ ] 5.2 Run the full test suite (`npx jest`) and verify all tests pass with zero failures.
-  - [ ] 5.3 Run `npm run build` to verify the production build succeeds with no TypeScript or compilation errors.
-  - [ ] 5.4 Run `npm run lint` to verify no linting errors were introduced.
-  - [ ] 5.5 Manually verify in the dev server (`npm run dev`): navigate to the dashboard, confirm the NotificationBanner appears when deadlines are within 3 days, confirm it dismisses, and confirm the expand/collapse toggle works.
-  - [ ] 5.6 Manually verify: click "Export" on a single deadline row, confirm a `.ics` file downloads with the correct filename and can be opened by a calendar application.
-  - [ ] 5.7 Manually verify: click "Export All" in the dashboard header, confirm a bulk `.ics` file downloads containing multiple events.
-  - [ ] 5.8 Update the parent task list `tasks/tasks-rfp-tracker.md` — check off task 7.0 and all its sub-tasks (7.1 through 7.6).
+- [x] 5.0 Integration verification & final polish
+  - [x] 5.1 Merge `feature/export-buttons` to `main` (after user approval), then create and checkout branch: `git checkout -b feature/final-polish`
+  - [x] 5.2 Run the full test suite (`npx jest`) and verify all tests pass with zero failures.
+  - [x] 5.3 Run `npm run build` to verify the production build succeeds with no TypeScript or compilation errors.
+  - [x] 5.4 Run `npm run lint` to verify no linting errors were introduced.
+  - [x] 5.5 Manually verify in the dev server (`npm run dev`): navigate to the dashboard, confirm the NotificationBanner appears when deadlines are within 3 days, confirm it dismisses, and confirm the expand/collapse toggle works.
+  - [x] 5.6 Manually verify: click "Export" on a single deadline row, confirm a `.ics` file downloads with the correct filename and can be opened by a calendar application.
+  - [x] 5.7 Manually verify: click "Export All" in the dashboard header, confirm a bulk `.ics` file downloads containing multiple events.
+  - [x] 5.8 Update the parent task list `tasks/tasks-rfp-tracker.md` — check off task 7.0 and all its sub-tasks (7.1 through 7.6).
   - [ ] 5.9 **Commit** any polish changes with a descriptive message.
   - [ ] 5.10 **CHECKPOINT — Wait for user to test and approve before merging to main.**

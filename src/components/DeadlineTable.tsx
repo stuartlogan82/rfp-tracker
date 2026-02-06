@@ -66,8 +66,10 @@ export default function DeadlineTable({
           break;
         case 'urgency':
           const urgencyOrder = { overdue: 0, critical: 1, warning: 2, safe: 3, completed: 4 };
-          const aDateString = typeof a.date === 'string' ? a.date.split('T')[0] : a.date.toISOString().split('T')[0];
-          const bDateString = typeof b.date === 'string' ? b.date.split('T')[0] : b.date.toISOString().split('T')[0];
+          const aDate = a.date instanceof Date ? a.date : new Date(a.date);
+          const bDate = b.date instanceof Date ? b.date : new Date(b.date);
+          const aDateString = aDate.toISOString().split('T')[0];
+          const bDateString = bDate.toISOString().split('T')[0];
           aVal = urgencyOrder[getUrgencyLevel(aDateString, a.completed, now)];
           bVal = urgencyOrder[getUrgencyLevel(bDateString, b.completed, now)];
           break;
@@ -144,13 +146,9 @@ export default function DeadlineTable({
         <TableBody>
           {sortedDeadlines.map((deadline) => {
             // Handle both Date objects and date strings
-            const dateString = typeof deadline.date === 'string'
-              ? deadline.date.split('T')[0]
-              : deadline.date.toISOString().split('T')[0];
-
-            const dateObj = typeof deadline.date === 'string'
-              ? parseISO(deadline.date)
-              : deadline.date;
+            const date = deadline.date instanceof Date ? deadline.date : new Date(deadline.date);
+            const dateString = date.toISOString().split('T')[0];
+            const dateObj = date;
 
             const urgencyLevel = getUrgencyLevel(
               dateString,

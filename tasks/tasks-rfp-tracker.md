@@ -104,7 +104,7 @@ Update the file after completing each sub-task, not just after completing an ent
 
 - [x] 6.0 Dashboard UI & deadline visualization — **See `tasks/tasks-dashboard-ui.md` for detailed sub-tasks**
 
-- [ ] 7.0 In-app notifications & calendar export — **See `tasks/tasks-notifications-calendar-export.md` for detailed sub-tasks**
+- [x] 7.0 In-app notifications & calendar export — **See `tasks/tasks-notifications-calendar-export.md` for detailed sub-tasks**
 
 - [ ] 8.0 Testing & final polish
   - [ ] 8.1 Create and checkout a new feature branch (`git checkout -b feature/testing-polish`)
