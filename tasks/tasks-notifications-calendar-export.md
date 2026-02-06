@@ -87,7 +87,7 @@ main
     - Wrap in try/catch — return 500 with JSON error on unexpected failures.
   - [x] 2.9 **Verify GREEN:** Run `npx jest src/app/api/export/route.test.ts` — all tests must pass.
   - [x] 2.10 **Full regression:** Run `npx jest` to confirm no regressions in existing tests.
-  - [ ] 2.11 **Commit:** Stage and commit all changes with a descriptive message.
+  - [x] 2.11 **Commit:** Stage and commit all changes with a descriptive message.
   - [ ] 2.12 **CHECKPOINT — Wait for user to test and approve before merging to main.**
 
 - [ ] 3.0 Build NotificationBanner component (`src/components/NotificationBanner.tsx`)
