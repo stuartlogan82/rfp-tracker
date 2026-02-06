@@ -102,7 +102,7 @@ Update the file after completing each sub-task, not just after completing an ent
   - [x] 5.9 Implement manual deadline add/edit/delete within the RFP detail view
   - [x] 5.10 Wire up the full upload-to-extraction flow: user uploads document → file is saved → text extracted → AI extracts dates → user reviews → dates saved → RFP created or updated
 
-- [ ] 6.0 Dashboard UI & deadline visualization — **See `tasks/tasks-dashboard-ui.md` for detailed sub-tasks**
+- [x] 6.0 Dashboard UI & deadline visualization — **See `tasks/tasks-dashboard-ui.md` for detailed sub-tasks**
 
 - [ ] 7.0 In-app notifications & calendar export
   - [ ] 7.1 Create and checkout a new feature branch (`git checkout -b feature/notifications-calendar-export`)
